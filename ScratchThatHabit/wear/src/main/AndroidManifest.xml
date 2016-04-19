@@ -26,6 +26,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ScratchingAlert"
+            android:label="@string/app_name"
+            android:parentActivityName="ea.scratchthathabit.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ea.scratchthathabit.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ScratchingSolution"
+            android:label="@string/app_name"
+            android:parentActivityName="ea.scratchthathabit.ScratchingAlert" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ea.scratchthathabit.ScratchingAlert" />
+        </activity>
+        <activity
+            android:name=".ScratchingDistraction"
+            android:label="@string/app_name"
+            android:parentActivityName="ea.scratchthathabit.ScratchingSolution" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ea.scratchthathabit.ScratchingSolution" />
+        </activity>
+        <activity
+            android:name=".ScratchingResolution"
+            android:label="@string/app_name"
+            android:parentActivityName="ea.scratchthathabit.ScratchingSolution" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ea.scratchthathabit.ScratchingSolution" />
+        </activity>
     </application>
 
 </manifest>
