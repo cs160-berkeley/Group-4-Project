@@ -58,6 +58,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ea.scratchthathabit.ScratchingSolution" />
         </activity>
+        <activity
+            android:name=".ContextualReminder"
+            android:label="@string/app_name"
+            android:parentActivityName="ea.scratchthathabit.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ea.scratchthathabit.MainActivity" />
+        </activity>
+        <activity
+            android:name=".TimedReminder"
+            android:label="@string/app_name"
+            android:parentActivityName="ea.scratchthathabit.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ea.scratchthathabit.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ItemList"
+            android:label="@string/app_name"
+            android:parentActivityName="ea.scratchthathabit.ContextualReminder" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ea.scratchthathabit.ContextualReminder" />
+        </activity>
     </application>
 
 </manifest>

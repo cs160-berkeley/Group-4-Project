@@ -53,28 +53,22 @@ public class MainActivity extends WearableActivity {
         }
 
         @Override
+        public boolean onDoubleTap(MotionEvent event) {
+            Intent sendWearIntent = new Intent(getBaseContext(), ContextualReminder.class);
+            startActivity(sendWearIntent);
+            return true;
+        }
+
+        @Override
         public boolean onSingleTapUp(MotionEvent ev) {
             Intent sendWearIntent = new Intent(getBaseContext(), ScratchingAlert.class);
             startActivity(sendWearIntent);
             return true;
         }
-        @Override
-        public void onShowPress(MotionEvent ev) {
-            Log.d("onShowPress",ev.toString());
-        }
-        @Override
-        public void onLongPress(MotionEvent ev) {
-            Log.d("onLongPress",ev.toString());
-        }
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            Intent sendWearIntent = new Intent(getBaseContext(), ScratchingAlert.class);
-            startActivity(sendWearIntent);
-            return true;
-        }
+
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            Intent sendWearIntent = new Intent(getBaseContext(), ScratchingAlert.class);
+            Intent sendWearIntent = new Intent(getBaseContext(), TimedReminder.class);
             startActivity(sendWearIntent);
             return true;
         }
