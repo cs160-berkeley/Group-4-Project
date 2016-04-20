@@ -1,8 +1,14 @@
 package ea.scratchthathabit;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.view.MotionEventCompat;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,55 +16,61 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import ea.scratchthathabit.R;
+
 public class MainActivity extends WearableActivity {
 
-    private static final SimpleDateFormat AMBIENT_DATE_FORMAT =
-            new SimpleDateFormat("HH:mm", Locale.US);
-
-    private BoxInsetLayout mContainerView;
-    private TextView mTextView;
-    private TextView mClockView;
+    private GestureDetectorCompat mDetector;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setAmbientEnabled();
-
-        mContainerView = (BoxInsetLayout) findViewById(R.id.container);
-        mTextView = (TextView) findViewById(R.id.text);
-        mClockView = (TextView) findViewById(R.id.clock);
+        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
     }
 
     @Override
-    public void onEnterAmbient(Bundle ambientDetails) {
-        super.onEnterAmbient(ambientDetails);
-        updateDisplay();
+    public boolean dispatchTouchEvent(MotionEvent event){
+        int action = MotionEventCompat.getActionMasked(event);
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
-    @Override
-    public void onUpdateAmbient() {
-        super.onUpdateAmbient();
-        updateDisplay();
-    }
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
 
-    @Override
-    public void onExitAmbient() {
-        updateDisplay();
-        super.onExitAmbient();
-    }
+        @Override
+        public boolean onDown(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onDown: " + event.toString());
+            return true;
+        }
 
-    private void updateDisplay() {
-        if (isAmbient()) {
-            mContainerView.setBackgroundColor(getResources().getColor(android.R.color.black));
-            mTextView.setTextColor(getResources().getColor(android.R.color.white));
-            mClockView.setVisibility(View.VISIBLE);
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent event) {
+            Intent sendWearIntent = new Intent(getBaseContext(), ScratchingAlert.class);
+            startActivity(sendWearIntent);
+            return true;
+        }
 
-            mClockView.setText(AMBIENT_DATE_FORMAT.format(new Date()));
-        } else {
-            mContainerView.setBackground(null);
-            mTextView.setTextColor(getResources().getColor(android.R.color.black));
-            mClockView.setVisibility(View.GONE);
+        @Override
+        public boolean onDoubleTap(MotionEvent event) {
+            Intent sendWearIntent = new Intent(getBaseContext(), ContextualReminder.class);
+            startActivity(sendWearIntent);
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent ev) {
+            Intent sendWearIntent = new Intent(getBaseContext(), ScratchingAlert.class);
+            startActivity(sendWearIntent);
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            Intent sendWearIntent = new Intent(getBaseContext(), TimedReminder.class);
+            startActivity(sendWearIntent);
+            return true;
         }
     }
 }
