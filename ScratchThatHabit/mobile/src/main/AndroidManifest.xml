@@ -13,14 +13,21 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RemindersActivity">
-        </activity>
-
-        <activity android:name=".RemindersContextActivity"></activity>
-        <activity android:name=".RemindersTimeActivity"></activity>
+        <activity android:name=".RemindersActivity" />
+        <activity android:name=".RemindersContextActivity" />
+        <activity android:name=".RemindersTimeActivity" />
+        <activity
+            android:name=".Lists"
+            android:label="@string/title_activity_lists"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditLists"
+            android:label="@string/title_activity_edit_lists"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

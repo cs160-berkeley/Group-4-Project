@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 
 /**
  * Created by Sarah on 4/18/2016.
+ * Edited by Tiffanie on 4/19/2016 - added functionality: Long Click brings user back to MainActivity
  */
 public class RemindersActivity extends AppCompatActivity implements GestureDetector.OnDoubleTapListener {
 
@@ -27,6 +28,7 @@ public class RemindersActivity extends AppCompatActivity implements GestureDetec
         btn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                onClick3(v);
                 return false;
             }
         });
@@ -34,6 +36,12 @@ public class RemindersActivity extends AppCompatActivity implements GestureDetec
 
     public void onClick(View view ) {
         Intent intent = new Intent(this, RemindersTimeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void onClick3(View view ) {
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
