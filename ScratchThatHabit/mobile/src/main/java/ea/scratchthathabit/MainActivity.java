@@ -1,9 +1,12 @@
 package ea.scratchthathabit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,7 +15,65 @@ import android.widget.ImageButton;
 
 //Edited by Tiffanie Lo 4/19/2016 - Added Functionality: Click brings user to Lists
 //Long Click brings user to Reminders
-public class MainActivity extends AppCompatActivity implements GestureDetector.OnDoubleTapListener, GestureDetector.OnGestureListener{
+//Edited by Simon 4/20 early morning
+//Was too lazy to figure out how to work with Tiffanie's implementation, so I
+//copy-pasted mine, sorry. But I implemented transitions to the graph/weather activities.
+public class MainActivity extends Activity /*implements GestureDetector.OnDoubleTapListener, GestureDetector.OnGestureListener*/{
+
+    private GestureDetectorCompat mDetector;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        Log.d("Gestures", "in onTouchEvent");
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
+
+        @Override
+        public boolean onDown(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onDown: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent event) {
+            Intent sendIntent = new Intent(getBaseContext(), Lists.class);
+            startActivity(sendIntent);
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent e) {
+            Intent sendIntent = new Intent(getBaseContext(), GraphActivity.class);
+            startActivity(sendIntent);
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            Intent sendIntent = new Intent(getBaseContext(), WeatherActivity.class);
+            startActivity(sendIntent);
+            return true;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent ev) {
+            Intent sendIntent = new Intent(getBaseContext(), RemindersActivity.class);
+            startActivity(sendIntent);
+        }
+    }
+
+    /**
     ImageButton btn;
     GestureDetectorCompat mDetector;
 
@@ -104,5 +165,5 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         return false;
     }
 
-
+*/
 }
