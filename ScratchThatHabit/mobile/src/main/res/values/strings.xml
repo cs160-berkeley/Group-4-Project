@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Scratch That Habit</string>
+    <string name="title_activity_lists">Lists</string>
+    <string name="title_activity_edit_lists">EditLists</string>
 </resources>
