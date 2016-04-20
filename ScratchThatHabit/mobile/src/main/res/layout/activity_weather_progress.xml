@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <TextView
+        android:text=""
+        android:id="@+id/zip"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/today_label"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:layout_below="@+id/zip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text=""
+        android:id="@+id/today"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/today_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_below="@id/today"
+        android:layout_centerInParent="true"
+        android:id="@+id/allergens"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tomorrow_label"
+        android:layout_marginTop="20dp"
+        android:text="Tomorrow's forecast:"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/allergens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tomorrow"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/tomorrow_label"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>
