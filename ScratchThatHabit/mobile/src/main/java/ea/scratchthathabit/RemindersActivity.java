@@ -59,7 +59,7 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
         public boolean onDoubleTapEvent(MotionEvent e) {
             Intent sendWearIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
             sendWearIntent.putExtra("TYPE", "Timed");
-            startActivity(sendWearIntent);
+            startService(sendWearIntent);
             return true;
         }
 
@@ -67,7 +67,7 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             Intent sendWearIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
             sendWearIntent.putExtra("TYPE", "Context");
-            startActivity(sendWearIntent);
+            startService(sendWearIntent);
             return true;
         }
 

@@ -40,6 +40,9 @@ public class ContextualReminder extends MainActivity {
         public boolean onDoubleTap(MotionEvent event) {
             Intent sendWearIntent = new Intent(getBaseContext(), ItemList.class);
             startActivity(sendWearIntent);
+            Intent sendMobileIntent = new Intent(getBaseContext(), WatchToPhoneService.class);
+            sendMobileIntent.putExtra("TYPE", "List");
+            startService(sendMobileIntent);
             return true;
         }
 

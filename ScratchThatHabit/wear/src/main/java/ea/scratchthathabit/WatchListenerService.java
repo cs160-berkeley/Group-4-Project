@@ -20,7 +20,7 @@ public class WatchListenerService extends WearableListenerService {
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
-        //Log.d("T", "in WatchListenerService, got: " + messageEvent.getPath());
+        Log.d("T", "in WatchListenerService, got: " + messageEvent.getPath());
         //use the 'path' field in sendmessage to differentiate use cases
 
         /* Following sends intent to RepView, but is unused. Add resources from phone for RepView to use */

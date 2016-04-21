@@ -50,7 +50,8 @@ public class WatchToPhoneService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
-        // Bundle extras = intent.getExtras();
+        Bundle extras = intent.getExtras();
+        final String type = extras.getString("TYPE");
 
         Log.d("T", "WtPS started");
 
@@ -60,6 +61,7 @@ public class WatchToPhoneService extends Service {
             public void run() {
                 //first, connect to the apiclient
                 mApiClient.connect();
+                sendMessage("/" + type, type);
                 //now that you're connected, send a massage with the cat name
                 /**
                 if (type != null){
@@ -80,12 +82,12 @@ public class WatchToPhoneService extends Service {
     private void sendMessage( final String path, final String text ) {
         //one way to send message: start a new thread and call .await()
         //see watchtophoneservice for another way to send a message
-        Log.d("T", "WtPS sending message with text: " + text);
+        //Log.d("T", "WtPS sending message with text: " + text);
         new Thread( new Runnable() {
             @Override
             public void run() {
                 NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mApiClient ).await();
-                Log.d("T", "WtPS inside sendmessage runnable");
+                //Log.d("T", "WtPS inside sendmessage runnable");
                 for(Node node : nodes.getNodes()) {
                     //we find 'nodes', which are nearby bluetooth devices (aka emulators)
                     //send a message for each of these nodes (just one, for an emulator)
