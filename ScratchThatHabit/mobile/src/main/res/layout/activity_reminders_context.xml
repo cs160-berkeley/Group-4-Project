@@ -3,9 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn"
-        android:onClick="onClick"
         android:scaleType="fitXY"
         android:src="@drawable/context_reminders"
         android:layout_width="match_parent"

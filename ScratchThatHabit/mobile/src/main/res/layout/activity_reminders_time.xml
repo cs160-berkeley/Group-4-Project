@@ -3,13 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn"
-        android:onClick="onClick"
-        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
         android:src="@drawable/time_reminders"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 
 </LinearLayout>
