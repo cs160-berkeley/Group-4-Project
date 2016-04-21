@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -80,10 +81,10 @@ public class WeatherProgressActivity extends AppCompatActivity implements Google
 
     }
 
-    private class getZipTask extends AsyncTask<Void, Void, String> {
+    private class getZipTask extends AsyncTask<Void, Void, String[]> {
 
         @Override
-        protected String doInBackground(Void... params) {
+        protected String[] doInBackground(Void... params) {
             String getZipUrl = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + mLatitude + "," + mLongitude;
             System.out.println(getZipUrl);
             StringBuilder result = new StringBuilder();
@@ -128,17 +129,17 @@ public class WeatherProgressActivity extends AppCompatActivity implements Google
                     result.replace(result.lastIndexOf("\""), result.length(), "");
                     result.replace(result.indexOf("\""), result.indexOf("\"") + 1, "");
                     JSONArray array = new JSONArray(result.toString().replaceAll("\\\\", ""));
-                    JSONObject obj = array.getJSONObject(0);
-                    JSONObject pollenForecast = obj.getJSONObject("pollenForecast");
-                    System.out.println(pollenForecast.toString());
-//                    for (int i = 0; i < array.length(); i++) {
-//                        JSONObject obj = array.getJSONObject(i);
-//                        System.out.println(obj.toString());
-////                        if (obj.has("pollenForecast")) {
-////                            System.out.println("True");
-////                        }
-//                    }
-
+                    JSONObject object = array.getJSONObject(0);
+                    JSONObject obj = object.getJSONObject("pollenForecast");
+                    String zip = obj.getString("zip");
+                    String allergens = obj.getString("pp");
+                    JSONArray forecast = obj.getJSONArray("forecast");
+                    String[] info = new String[4];
+                    info[0] = zip;
+                    info[1] = forecast.getString(0);
+                    info[2] = forecast.getString(1);
+                    info[3] = allergens;
+                    return info;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -146,8 +147,17 @@ public class WeatherProgressActivity extends AppCompatActivity implements Google
             return null;
         }
 
+
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(String[] s) {
+            TextView zip = (TextView) findViewById(R.id.zip);
+            zip.setText(s[0]);
+            TextView today = (TextView) findViewById(R.id.today);
+            today.setText(s[1]);
+            TextView tomorrow = (TextView) findViewById(R.id.tomorrow);
+            tomorrow.setText(s[2]);
+            TextView allergens = (TextView) findViewById(R.id.allergens);
+            allergens.setText(s[3]);
             super.onPostExecute(s);
         }
     }
