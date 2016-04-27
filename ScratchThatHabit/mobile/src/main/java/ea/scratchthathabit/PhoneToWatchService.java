@@ -11,9 +11,12 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Simon Bonzon on 4/20/2016.
- * Taken from my Represent! app, which was taken from CatNip
+ * Copied from my Represent! app, which was copied from CatNip
  */
 public class PhoneToWatchService extends Service {
 
@@ -49,6 +52,18 @@ public class PhoneToWatchService extends Service {
         // which was passed over when we called startService
         Bundle extras = intent.getExtras();
         final String type = extras.getString("TYPE");
+        final JSONObject json = new JSONObject();
+        try {
+            if (type.equalsIgnoreCase("Timed")) {
+                json.put("REMINDER", extras.getString("REMINDER"));
+                json.put("TIME", extras.getString("TIME"));
+            } else if (type.equalsIgnoreCase("Context")) {
+                json.put("LIST", extras.getString("LIST"));
+                json.put("ITEMS", extras.getString("ITEMS"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         //final String location = extras.getString("LOCATION");
 
         // Send the message with the cat name
@@ -58,7 +73,7 @@ public class PhoneToWatchService extends Service {
                 //first, connect to the apiclient
                 mApiClient.connect();
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/" + type, type);
+                sendMessage("/" + type, json.toString());
             }
         }).start();
 
