@@ -30,11 +30,51 @@ public class MainActivity extends AppCompatActivity implements
     private GestureDetectorCompat mDetector;
     private GoogleApiClient mGoogleApiClient;
 
+    private ImageButton weatherButton;
+    private ImageButton listsButton;
+    private ImageButton graphsButton;
+    private ImageButton remindersButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+
+        weatherButton = (ImageButton) findViewById(R.id.weather_button);
+        listsButton = (ImageButton) findViewById(R.id.lists_button);
+        graphsButton = (ImageButton) findViewById(R.id.graphs_button);
+        remindersButton = (ImageButton) findViewById(R.id.reminders_button);
+
+
+
+        weatherButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                weather(v);
+            }
+        });
+
+        listsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lists(v);
+            }
+        });
+
+        graphsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                graphs(v);
+            }
+        });
+
+        remindersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reminders(v);
+            }
+        });
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -44,6 +84,30 @@ public class MainActivity extends AppCompatActivity implements
                     .addOnConnectionFailedListener(this)
                     .build();
         }
+    }
+
+    public void weather(View view ) {
+        Intent intent = new Intent(this, WeatherActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void lists(View view ) {
+        Intent intent = new Intent(this, Lists.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void graphs(View view ) {
+        Intent intent = new Intent(this, GraphActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void reminders(View view ) {
+        Intent intent = new Intent(this, RemindersActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override
