@@ -6,6 +6,9 @@ import android.util.Log;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -28,6 +31,14 @@ public class WatchListenerService extends WearableListenerService {
         if( messageEvent.getPath().equalsIgnoreCase( TIMED ) ) {
             String value = new String(messageEvent.getData(), StandardCharsets.UTF_8);
             Intent intent = new Intent(this, TimedReminder.class );
+            JSONObject json;
+            try {
+                json = new JSONObject(value);
+                intent.putExtra("REMINDER", json.getString("REMINDER"));
+                intent.putExtra("TIME", json.getString("TIME"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             //you need to add this flag since you're starting a new activity from a service
             //Log.d("T", "about to start watch RepresentativeView with LOCATION_TYPE: District");
@@ -35,6 +46,14 @@ public class WatchListenerService extends WearableListenerService {
         } else if (messageEvent.getPath().equalsIgnoreCase( CONTEXT )) {
             String value = new String(messageEvent.getData(), StandardCharsets.UTF_8);
             Intent intent = new Intent(this, ContextualReminder.class );
+            JSONObject json;
+            try {
+                json = new JSONObject(value);
+                intent.putExtra("LIST", json.getString("LIST"));
+                intent.putExtra("ITEMS", json.getString("ITEMS"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
             //you need to add this flag since you're starting a new activity from a service
             //Log.d("T", "about to start watch RepresentativeView with LOCATION_TYPE: Zip Code");
