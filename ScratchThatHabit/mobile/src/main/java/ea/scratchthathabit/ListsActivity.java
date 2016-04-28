@@ -27,7 +27,6 @@ public class ListsActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("List activity started");
         setContentView(R.layout.activity_lists);
 
         MyApp myApp = (MyApp) getApplicationContext();
@@ -38,7 +37,6 @@ public class ListsActivity extends AppCompatActivity {
         }
         listLayout = (LinearLayout) findViewById(R.id.list_layout);
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.list_toolbar);
-        Log.d("LIST", "" + toolbar.getId());
 
         setSupportActionBar(toolbar);
 
@@ -48,7 +46,6 @@ public class ListsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), EditListsActivity.class);
                 intent.putExtra("mode", "create");
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityForResult(intent, requestCode);
             }
         });
@@ -78,7 +75,6 @@ public class ListsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), EditListsActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("mode", "edit");
                 intent.putExtra("listname", name);
                 startActivityForResult(intent, requestCode);
@@ -91,16 +87,14 @@ public class ListsActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (this.requestCode == requestCode) {
             if (resultCode == RESULT_OK) {
-                String result = data.getData().toString();
-                ItemList itemList = lists.get(result);
-                addNameView(itemList);
+                String listname = data.getStringExtra("listname");
+                String mode = data.getStringExtra("mode");
+                ItemList itemList = lists.get(listname);
+                if (mode.equals("create")) {
+                    addNameView(itemList);
+                }
             }
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        System.out.println("Something clicked");
-        return super.onOptionsItemSelected(item);
-    }
 }

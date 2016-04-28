@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
 // Created by Tiffanie Lo on 4/19/2016: Functionality: Click brings user back to ListsActivity
 public class EditListsActivity extends AppCompatActivity {
 
+    private String activity = "EditList";
     private LinkedHashMap<String, ItemList> lists;
     private EditText enterListName;
     private EditText enterItem;
@@ -59,7 +62,6 @@ public class EditListsActivity extends AppCompatActivity {
             items = itemList.getList();
             populate();
         }
-        items = new ArrayList<>();
         super.onCreate(savedInstanceState);
 
         addItemBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +86,7 @@ public class EditListsActivity extends AppCompatActivity {
     }
 
     public void populate() {
+        enterListName.setText(itemList.getName());
         for (String s : items) {
             addItemView(s);
         }
@@ -108,22 +111,20 @@ public class EditListsActivity extends AppCompatActivity {
 
     public void onSave() {
         String name = enterListName.getText().toString();
+        Intent intent = new Intent();
         if (name.equals("")) {
             return;
         }
-        if (mode.equals("create")) {
-            itemList = new ItemList(name, items);
-            lists.put(name, itemList);
-        } else {
+        if (mode.equals("edit")) {
             String oldName = itemList.getName();
             if (!oldName.equals(name)) {
                 lists.remove(oldName);
-                itemList.setName(name);
-                lists.put(name, itemList);
             }
         }
-        Intent intent = new Intent();
-        intent.setData(Uri.parse(name));
+        itemList = new ItemList(name, items);
+        lists.put(name, itemList);
+        intent.putExtra("listname", name);
+        intent.putExtra("mode", mode);
         setResult(RESULT_OK, intent);
         finish();
     }

@@ -27,6 +27,7 @@
             />
         <activity
             android:name=".EditListsActivity"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
