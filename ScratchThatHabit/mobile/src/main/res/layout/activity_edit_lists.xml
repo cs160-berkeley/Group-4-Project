@@ -1,34 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/AppTheme.NoActionBar"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="ea.scratchthathabit.EditLists">
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backgroundGrey"
+    tools:context=".EditListsActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="?attr/actionBarSize">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="match_parent">
 
-    </android.support.design.widget.AppBarLayout>
+            <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/close_white"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
 
-    <include layout="@layout/content_edit_lists" />
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:text="@string/title_activity_edit_lists"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+            <ImageButton
+                android:id="@+id/btn_save"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/save_white"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
 
-</android.support.design.widget.CoordinatorLayout>
+            <View
+                android:background="@color/colorPrimaryDark"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:inputType="textFilter"
+            android:singleLine="true"
+            android:textColor="@color/text"
+            android:id="@+id/enter_list_name"
+            android:hint="List name"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:background="@drawable/edittextstyle"
+            android:layout_width="200dp"
+            android:layout_height="40dp" />
+
+        <LinearLayout
+            android:layout_below="@id/enter_list_name"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:layout_marginTop="20dp"
+                android:id="@+id/scroll_list"
+                android:fillViewport="true"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/list_items"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content">
+
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="70dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:inputType="textFilter"
+                    android:singleLine="true"
+                    android:textColor="@color/text"
+                    android:layout_marginLeft="30dp"
+                    android:textAlignment="center"
+                    android:id="@+id/enter_item"
+                    android:hint="   Add item"
+                    android:background="@drawable/edittextstyle"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp" />
+
+                <ImageButton
+                    android:id="@+id/add_item_btn"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/add_button"
+                    android:layout_toRightOf="@id/enter_item"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/attach_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="20dp"
+                android:textColor="@color/text"
+                android:text="@string/attach_reminder_text"
+                android:id="@+id/attach_text"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:layout_toRightOf="@id/attach_text"
+                android:background="@drawable/add_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
