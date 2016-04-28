@@ -22,7 +22,9 @@
         <activity android:name=".RemindersContextActivity" />
         <activity android:name=".RemindersTimeActivity" />
         <activity
-            android:name=".ListsActivity" />
+            android:name=".ListsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".EditListsActivity"
             android:theme="@style/AppTheme.NoActionBar">

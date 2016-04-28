@@ -1,6 +1,7 @@
 package ea.scratchthathabit;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -121,6 +122,10 @@ public class EditListsActivity extends AppCompatActivity {
                 lists.put(name, itemList);
             }
         }
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(name));
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     public void onClose() {
