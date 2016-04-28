@@ -24,12 +24,24 @@ import android.widget.ImageButton;
 public class RemindersActivity extends Activity /*implements GestureDetector.OnDoubleTapListener, GestureDetector.OnGestureListener*/ {
 
     private GestureDetectorCompat mDetector;
+    ImageButton addReminder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminders);
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+        addReminder = (ImageButton) findViewById(R.id.PlusBtn);
+        addReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent(getBaseContext(), RemindersTimeActivity.class);
+                startActivity(sendIntent);
+            }
+        });
+        //Still need to implement dynamically adding reminder views
+        //Still need to implement making reminder views buttons that are clickable that send to edit page
+
     }
 
     @Override
@@ -50,8 +62,9 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
-            Intent sendIntent = new Intent(getBaseContext(), RemindersTimeActivity.class);
-            startActivity(sendIntent);
+            //Replaced by Plus Button (addReminder)
+//            Intent sendIntent = new Intent(getBaseContext(), RemindersTimeActivity.class);
+//            startActivity(sendIntent);
             return true;
         }
 
