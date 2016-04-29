@@ -7,9 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -17,6 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
+
 
 /**
  * Created by Sarah on 4/18/2016.
@@ -261,7 +260,7 @@ public class RemindersTimeActivity extends Activity {
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
-            Intent sendIntent = new Intent(getBaseContext(), Lists.class);
+            Intent sendIntent = new Intent(getBaseContext(), ListsActivity.class);
             startActivity(sendIntent);
             return true;
         }

@@ -3,7 +3,6 @@ package ea.scratchthathabit;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -61,7 +60,7 @@ public class RemindersContextActivity extends AppCompatActivity {
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
-            Intent sendIntent = new Intent(getBaseContext(), Lists.class);
+            Intent sendIntent = new Intent(getBaseContext(), ListsActivity.class);
             startActivity(sendIntent);
             return true;
         }

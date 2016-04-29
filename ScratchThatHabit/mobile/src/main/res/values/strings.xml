@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Scratch That Habit</string>
     <string name="title_activity_lists">Lists</string>
-    <string name="title_activity_edit_lists">EditLists</string>
+    <string name="title_activity_weather">Weather</string>
+    <string name="title_activity_edit_lists">Edit list</string>
+    <string name="attach_reminder_text">Attach to a reminder</string>
 </resources>
