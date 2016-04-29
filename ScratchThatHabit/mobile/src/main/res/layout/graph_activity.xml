@@ -1,38 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    android:background="#eeeeee">
+    android:background="@color/backgroundGrey">
 
-    <Button
-        android:layout_width="90dp"
-        android:layout_height="45dp"
-        android:text="Day"
-        android:id="@+id/day"
-        android:background="#1ab8bf"
-        android:layout_alignTop="@+id/month"
-        android:layout_toStartOf="@+id/month" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
 
-    <Button
-        android:layout_width="90dp"
-        android:layout_height="45dp"
-        android:text="Month"
-        android:id="@+id/month"
-        android:background="#ffffff"
-        android:layout_marginTop="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="90dp"
-        android:layout_height="45dp"
-        android:text="Year"
-        android:id="@+id/year"
-        android:background="#ffffff"
-        android:layout_alignTop="@+id/month"
-        android:layout_toEndOf="@+id/month" />
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:text="@string/title_activity_graphs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:background="@color/colorPrimaryDark"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/buttonPanel"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:text="Day"
+            android:id="@+id/day"
+            android:background="#1ab8bf"
+            android:layout_alignTop="@+id/month"
+            android:layout_toStartOf="@+id/month" />
+
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:text="Month"
+            android:id="@+id/month"
+            android:background="#ffffff"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:text="Year"
+            android:id="@+id/year"
+            android:background="#ffffff"
+            android:layout_alignTop="@+id/month"
+            android:layout_toEndOf="@+id/month" />
+
+    </RelativeLayout>
+
 
     <CheckBox
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scratching"
@@ -60,7 +109,7 @@
         android:checked="true"
         android:buttonTint="#14E579"
         android:layout_above="@+id/remindersBox"
-        android:layout_alignEnd="@+id/year" />
+        android:layout_alignEnd="@+id/graph" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -78,7 +127,7 @@
         android:id="@+id/graph"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="150dp"
         android:src="@drawable/graph" />
 
     <ImageView
@@ -87,7 +136,7 @@
         android:id="@+id/temperatureLine"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="150dp"
         android:src="@drawable/temperature_day" />
 
     <ImageView
@@ -96,7 +145,7 @@
         android:id="@+id/scratchingLine"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="150dp"
         android:src="@drawable/scratching_day" />
 
     <ImageView
@@ -105,7 +154,7 @@
         android:id="@+id/pollenLine"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="150dp"
         android:src="@drawable/pollen_day" />
 
     <ImageView
@@ -114,7 +163,7 @@
         android:id="@+id/remindersLine"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="150dp"
         android:src="@drawable/reminders_day" />
 
 </RelativeLayout>

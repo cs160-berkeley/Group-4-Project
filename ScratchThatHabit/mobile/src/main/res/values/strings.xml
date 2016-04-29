@@ -6,6 +6,7 @@
     <string name="title_activity_reminders">Reminders</string>
     <string name="title_activity_reminder_time">Time Reminder</string>
     <string name="title_activity_reminder_context">Context Reminder</string>
+    <string name="title_activity_graphs">Graphs</string>
     <string name="attach_reminder_text">Attach to a reminder</string>
     <string name="weather">weather</string>
     <string name="reminders">reminders</string>

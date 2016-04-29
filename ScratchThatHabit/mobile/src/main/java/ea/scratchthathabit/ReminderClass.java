@@ -10,6 +10,7 @@ public class ReminderClass {
     ArrayList<String> RDays = new ArrayList<String>();
     int RHour;
     int RMinute;
+    ItemList itemList;
 
     public ReminderClass(String RName){
         // This constructor has one parameter, name.
@@ -67,4 +68,15 @@ public class ReminderClass {
         return RMinute;
     }
 
+    public void setItemList(ItemList itemList) {
+        this.itemList = itemList;
+    }
+
+    public ItemList getItemList() {
+        return itemList;
+    }
+
+    public boolean hasItemList() {
+        return itemList != null;
+    }
 }
