@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scratch That Habit</string>
+    <string name="app_name">Scratch That Habit!</string>
     <string name="title_activity_lists">Lists</string>
     <string name="title_activity_weather">Weather</string>
     <string name="title_activity_edit_lists">Edit list</string>
@@ -11,4 +11,6 @@
     <string name="reminders">reminders</string>
     <string name="lists">lists</string>
     <string name="graphs">graphs</string>
+    <string name="pollen">Pollen</string>
+    <string name="humidity">Humidity</string>
 </resources>
