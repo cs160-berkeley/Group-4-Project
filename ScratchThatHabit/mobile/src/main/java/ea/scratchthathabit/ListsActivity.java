@@ -1,5 +1,6 @@
 package ea.scratchthathabit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ import java.util.LinkedHashMap;
 //Created by Tiffanie Lo 4/19/16: Functionality: Click brings user to EditListsActivity
 //LongClick brings user to Main Activity
 
-public class ListsActivity extends AppCompatActivity {
+public class ListsActivity extends Activity {
 
     private android.support.v7.widget.Toolbar toolbar;
     private LinearLayout listLayout;
@@ -38,7 +39,7 @@ public class ListsActivity extends AppCompatActivity {
         listLayout = (LinearLayout) findViewById(R.id.list_layout);
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.list_toolbar);
 
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         addBtn = (ImageButton) toolbar.findViewById(R.id.toolbar_layout).findViewById(R.id.list_btn_add);
         addBtn.setOnClickListener(new View.OnClickListener() {

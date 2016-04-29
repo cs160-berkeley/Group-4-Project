@@ -1,5 +1,6 @@
 package ea.scratchthathabit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 // Created by Tiffanie Lo on 4/19/2016: Functionality: Click brings user back to ListsActivity
-public class EditListsActivity extends AppCompatActivity {
+public class EditListsActivity extends Activity {
 
     private String activity = "EditList";
     private LinkedHashMap<String, ItemList> lists;
