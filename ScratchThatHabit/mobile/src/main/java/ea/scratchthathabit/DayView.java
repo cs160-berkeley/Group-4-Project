@@ -5,12 +5,13 @@ import android.media.Image;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
  * Created by Sarah on 4/28/2016.
  */
-public class DayView extends LinearLayout {
+public class DayView extends RelativeLayout {
 
     private TextView day;
     private ImageView weatherImg;
@@ -47,32 +48,35 @@ public class DayView extends LinearLayout {
 
     public void setWeather(String weather) {
         if (weather.equals("Sunny")) {
-
+            weatherImg.setImageResource(R.drawable.sunny);
         } else if (weather.equals("Mostly Sunny")) {
-
+            weatherImg.setImageResource(R.drawable.mostly_sunny);
         } else {
-
+            weatherImg.setImageResource(R.drawable.cloudy);
         }
     }
 
     public void setTemperature(int temp) {
-        temperature.setText(String.valueOf(temp));
+        String degree = "\u00b0";
+        temperature.setText(String.valueOf(temp) + " " + degree + "F");
     }
 
     public void setHumidity(int humidity) {
-        humidityTxt.setText(String.valueOf(humidity));
+        humidityTxt.setText(String.valueOf(humidity) + "%");
         if (humidity > 70) {
+            humidityImage.setImageResource(R.drawable.humidity_high);
         } else if (humidity < 40) {
-
+            humidityImage.setImageResource(R.drawable.humidity_low);
         } else {
-
+            humidityImage.setImageResource(R.drawable.humidity_medium);
         }
     }
 
     public void setPollen(float count) {
         pollenTxt.setText(String.valueOf(count));
+        pollenImage.setImageResource(R.drawable.pollen);
         if (count > 9.7) {
-
+//            too high
         } else if (count > 7.3) {
 
         } else if (count > 4.9) {

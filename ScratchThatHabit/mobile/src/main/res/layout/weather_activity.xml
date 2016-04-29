@@ -26,7 +26,7 @@
             <TextView
                 android:layout_centerInParent="true"
                 android:textColor="@color/white"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:text="@string/title_activity_weather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -48,7 +48,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_weight="1"
             android:id="@+id/today_display"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -64,7 +63,7 @@
                 <TextView
                     android:layout_centerHorizontal="true"
                     android:text="Friday"
-                    android:textSize="30dp"
+                    android:textSize="24sp"
                     android:layout_marginTop="20dp"
                     android:id="@+id/today"
                     android:layout_width="wrap_content"
@@ -73,15 +72,13 @@
 
                 <ImageView
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_below="@id/today"
-                    android:src="@drawable/sunny"
                     android:id="@+id/today_weather"
                     android:layout_width="125dp"
                     android:layout_height="125dp" />
 
                 <RelativeLayout
-                    android:layout_marginTop="10dp"
                     android:id="@+id/temperature_layout"
                     android:layout_below="@id/today"
                     android:layout_toRightOf="@id/today_weather"
@@ -91,16 +88,15 @@
                     <TextView
                         android:layout_marginLeft="30dp"
                         android:layout_centerVertical="true"
-                        android:text="100"
                         android:textSize="48dp"
                         android:id="@+id/today_temp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <ImageView
+                        android:src="@drawable/temperature"
                         android:layout_toRightOf="@id/today_temp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/temperature"
                         android:id="@+id/today_temp_img"
                         android:layout_width="50dp"
                         android:layout_height="50dp" />
@@ -109,7 +105,6 @@
                         android:layout_centerHorizontal="true"
                         android:layout_below="@id/today_temp"
                         android:layout_marginTop="50dp"
-                        android:text="Sunny"
                         android:textSize="20dp"
                         android:id="@+id/weather_text"
                         android:layout_width="wrap_content"
@@ -122,7 +117,6 @@
 
             <LinearLayout
                 android:id="@+id/humidity_and_pollen"
-                android:layout_weight="1"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -140,17 +134,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
-                    <ImageView
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
                         android:layout_below="@id/humidity_label"
-                        android:id="@+id/humidity_img"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_toRightOf="@+id/humidity_img"
-                        android:id="@+id/humidity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:id="@+id/humidity_img"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/humidity_img"
+                            android:id="@+id/humidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
 
                 </RelativeLayout>
 
@@ -167,17 +172,30 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
-                    <ImageView
-                        android:layout_below="@+id/pollen_label"
-                        android:id="@+id/pollen_img"
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/pollen_label"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_toRightOf="@id/pollen_img"
-                        android:id="@+id/pollen"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/pollen"
+                            android:id="@+id/pollen_img"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/pollen_img"
+                            android:id="@+id/pollen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
 
                 </RelativeLayout>
 
@@ -186,6 +204,7 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/border"
             android:layout_below="@+id/today_display"
             android:layout_centerHorizontal="true"
             android:background="@color/colorPrimaryDark"
@@ -195,14 +214,44 @@
         </View>
 
         <LinearLayout
-            android:layout_weight="1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/border"
             android:id="@+id/future"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content">
 
 
         </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:layout_below="@id/border"-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="wrap_content">-->
+
+
+            <!--<TextView-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="hello"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content" />-->
+
+            <!--<TextView-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="hello"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content" />-->
+
+            <!--<TextView-->
+                <!--android:text="hello"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content" />-->
+
+        <!--</LinearLayout>-->
 
 
 
