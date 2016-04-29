@@ -28,7 +28,7 @@ public class ContextualReminder extends MainActivity {
         Intent intent = getIntent();
         final Bundle extras = intent.getExtras();
         if (extras != null) {
-            String listName = extras.getString("LIST");
+            String listName = extras.getString("LIST") + "?";
             listItems = extras.getString("ITEMS");
             mList.setText(listName);
         }

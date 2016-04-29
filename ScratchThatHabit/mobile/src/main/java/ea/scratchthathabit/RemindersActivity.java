@@ -1,9 +1,12 @@
 package ea.scratchthathabit;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,6 +40,10 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
     // toggle to push timed(FALSE)/contextual(TRUE) reminder
     private boolean pushType;
     private Switch mType;
+
+    NotificationCompat.Builder mBuilder;
+    NotificationManager mNotificationManager;
+    int mId;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -80,12 +87,26 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
                         sendWearIntent.putExtra("LIST", "Backpack");
                         sendWearIntent.putExtra("ITEMS", "Water Bottle\nVaseline\nAllergy Pills");
                         startService(sendWearIntent);
+                        mBuilder = new NotificationCompat.Builder(getBaseContext())
+                                .setSmallIcon(R.drawable.notification_icon)
+                                .setContentTitle("Reminder")
+                                .setContentText("Did you bring everything from Backpack?");
+                        mId = 1;
+                        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        mNotificationManager.notify(mId, mBuilder.build());
                     } else {
                         Intent sendWearIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
                         sendWearIntent.putExtra("TYPE", "Timed");
                         sendWearIntent.putExtra("REMINDER", "Drink Water");
                         sendWearIntent.putExtra("TIME", "2:00 PM");
                         startService(sendWearIntent);
+                        mBuilder = new NotificationCompat.Builder(getBaseContext())
+                                .setSmallIcon(R.drawable.notification_icon)
+                                .setContentTitle("Drink Water")
+                                .setContentText("2:00 PM");
+                        mId = 1;
+                        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        mNotificationManager.notify(mId, mBuilder.build());
                     }
                 } else {
                     Intent sendIntent = new Intent(getBaseContext(), RemindersTimeActivity.class);
@@ -93,50 +114,7 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
                 }
             }
         });
-
-        //mDetector = new GestureDetectorCompat(this, new MyGestureListener());
     }
-/**
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        Log.d("Gestures", "in onTouchEvent");
-        this.mDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final String DEBUG_TAG = "Gestures";
-        @Override
-        public boolean onDown(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDown: " + event.toString());
-            return true;
-        }
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent event) {
-            Intent sendIntent = new Intent(getBaseContext(), RemindersTimeActivity.class);
-            startActivity(sendIntent);
-            return true;
-        }
-        @Override
-        public boolean onDoubleTapEvent(MotionEvent e) {
-            Intent sendWearIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-            sendWearIntent.putExtra("TYPE", "Timed");
-            startService(sendWearIntent);
-            return true;
-        }
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            Intent sendWearIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-            sendWearIntent.putExtra("TYPE", "Context");
-            startService(sendWearIntent);
-            return true;
-        }
-        @Override
-        public void onLongPress(MotionEvent ev) {
-            Intent sendIntent = new Intent(getBaseContext(), MainActivity.class);
-            startActivity(sendIntent);
-        }
-    }
-        */
 }
 
 /**
