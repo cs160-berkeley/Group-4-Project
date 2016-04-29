@@ -1,5 +1,6 @@
 package ea.scratchthathabit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,7 @@ import com.google.android.gms.wearable.Wearable;
 //Edited by Simon 4/20 early morning
 //Was too lazy to figure out how to work with Tiffanie's implementation, so I
 //copy-pasted mine, sorry. But I implemented transitions to the graph/weather activities.
-public class MainActivity extends AppCompatActivity implements
+public class MainActivity extends Activity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener /*implements GestureDetector.OnDoubleTapListener, GestureDetector.OnGestureListener*/{
 
