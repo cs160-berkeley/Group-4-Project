@@ -23,12 +23,9 @@
         <activity android:name=".RemindersTimeActivity" />
         <activity
             android:name=".ListsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             />
         <activity
-            android:name=".EditListsActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".EditListsActivity">
 
         </activity>
         <activity android:name=".GraphActivity" />

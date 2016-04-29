@@ -1,14 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/btn"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/time_reminders"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="5dp"
+    android:background="@drawable/reminderblank">
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView"
+            android:layout_above="@+id/MinutePicker"
+            android:layout_centerHorizontal="true" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/HourPicker"
+            android:layout_marginTop="103dp"
+            android:layout_marginStart="97dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/MinutePicker"
+            android:layout_alignTop="@+id/HourPicker"
+            android:layout_toEndOf="@+id/RNameInput" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/RNameInput"
+            android:text="LOTION"
+            android:layout_above="@+id/MinutePicker"
+            android:layout_toEndOf="@+id/HourPicker" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AMPMPicker"
+            android:layout_below="@+id/scrollView"
+            android:layout_toEndOf="@+id/MinutePicker" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Monday"
+            android:background="@drawable/mwhite"
+            android:layout_alignTop="@+id/Saturday"
+            android:layout_toStartOf="@+id/Tuesday" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Tuesday"
+            android:background="@drawable/twhite"
+            android:layout_alignTop="@+id/Sunday"
+            android:layout_toEndOf="@+id/HourPicker" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Wednesday"
+            android:background="@drawable/wwhite"
+            android:layout_alignBottom="@+id/Tuesday"
+            android:layout_toEndOf="@+id/Tuesday" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Thursday"
+            android:background="@drawable/twhite"
+            android:layout_alignTop="@+id/Wednesday"
+            android:layout_toStartOf="@+id/Friday" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Friday"
+            android:background="@drawable/fwhite"
+            android:layout_alignTop="@+id/Thursday"
+            android:layout_toStartOf="@+id/Saturday" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Saturday"
+            android:background="@drawable/swhite"
+            android:layout_below="@+id/AMPMPicker"
+            android:layout_alignEnd="@+id/AMPMPicker" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Sunday"
+            android:background="@drawable/swhite"
+            android:layout_alignBottom="@+id/Monday"
+            android:layout_toStartOf="@+id/Monday" />
+
+    </RelativeLayout>
 </LinearLayout>

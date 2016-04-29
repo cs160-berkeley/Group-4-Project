@@ -6,51 +6,46 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by Simon Bonzon on 4/19/2016.
  */
 public class ContextualReminder extends MainActivity {
 
-    private GestureDetectorCompat mDetector;
+    private TextView mList;
+    private Button mYes;
+    private Button mViewList;
+    private String listItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contextual_reminder);
-        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event){
-        this.mDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
-
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final String DEBUG_TAG = "Gestures";
-
-        @Override
-        public boolean onDown(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDown: " + event.toString());
-            return true;
+        mList = (TextView) findViewById(R.id.listName);
+        Intent intent = getIntent();
+        final Bundle extras = intent.getExtras();
+        if (extras != null) {
+            String listName = extras.getString("LIST");
+            listItems = extras.getString("ITEMS");
+            mList.setText(listName);
         }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent event) {
-            Intent sendWearIntent = new Intent(getBaseContext(), ItemList.class);
-            startActivity(sendWearIntent);
-            Intent sendMobileIntent = new Intent(getBaseContext(), WatchToPhoneService.class);
-            sendMobileIntent.putExtra("TYPE", "List");
-            startService(sendMobileIntent);
-            return true;
-        }
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent event) {
-            Intent sendWearIntent = new Intent(getBaseContext(), MainActivity.class);
-            startActivity(sendWearIntent);
-            return true;
-        }
+        mYes = (Button) findViewById(R.id.yes);
+        mViewList = (Button) findViewById(R.id.viewList);
+        mYes.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent sendWearIntent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(sendWearIntent);
+            }
+        });
+        mViewList.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent sendWearIntent = new Intent(getBaseContext(), ItemList.class);
+                sendWearIntent.putExtra("ITEMS", listItems);
+                startActivity(sendWearIntent);
+            }
+        });
     }
 }
