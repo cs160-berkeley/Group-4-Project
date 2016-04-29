@@ -3,7 +3,12 @@
     <string name="title_activity_lists">Lists</string>
     <string name="title_activity_weather">Weather</string>
     <string name="title_activity_edit_lists">Edit list</string>
+    <string name="title_activity_reminders">Reminders</string>
     <string name="title_activity_reminder_time">Time Reminder</string>
     <string name="title_activity_reminder_context">Context Reminder</string>
     <string name="attach_reminder_text">Attach to a reminder</string>
+    <string name="weather">weather</string>
+    <string name="reminders">reminders</string>
+    <string name="lists">lists</string>
+    <string name="graphs">graphs</string>
 </resources>

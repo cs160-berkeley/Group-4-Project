@@ -10,6 +10,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -28,10 +29,10 @@ public class MainActivity extends Activity implements
     private GestureDetectorCompat mDetector;
     private GoogleApiClient mGoogleApiClient;
 
-    private ImageButton weatherButton;
-    private ImageButton listsButton;
-    private ImageButton graphsButton;
-    private ImageButton remindersButton;
+    private LinearLayout weatherButton;
+    private LinearLayout listsButton;
+    private LinearLayout graphsButton;
+    private LinearLayout remindersButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,10 @@ public class MainActivity extends Activity implements
         setContentView(R.layout.activity_main);
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
-        weatherButton = (ImageButton) findViewById(R.id.weather_button);
-        listsButton = (ImageButton) findViewById(R.id.lists_button);
-        graphsButton = (ImageButton) findViewById(R.id.graphs_button);
-        remindersButton = (ImageButton) findViewById(R.id.reminders_button);
+        weatherButton = (LinearLayout) findViewById(R.id.weather_button);
+        listsButton = (LinearLayout) findViewById(R.id.lists_button);
+        graphsButton = (LinearLayout) findViewById(R.id.graphs_button);
+        remindersButton = (LinearLayout) findViewById(R.id.reminders_button);
 
 
 

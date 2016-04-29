@@ -51,42 +51,110 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        >
-        <ImageButton
-            android:id="@+id/weather_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/weather_button"
-            android:background="@null"/>
+        android:layout_gravity="center">
 
-        <ImageButton
+        <LinearLayout
+            android:layout_marginRight="30dp"
+            android:id="@+id/weather_button"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/weather_white"
+                android:layout_width="90dp"
+                android:layout_height="90dp" />
+
+            <TextView
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:text="@string/weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:orientation="vertical"
             android:id="@+id/reminders_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/reminders_button"
-            android:background="@null"/>
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/alarm_white"
+                android:layout_width="90dp"
+                android:layout_height="90dp" />
+
+            <TextView
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:text="@string/reminders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
 
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        >
-        <ImageButton
-            android:id="@+id/graphs_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/graphs_button"
-            android:background="@null"/>
+        android:layout_gravity="center">
 
-        <ImageButton
+        <LinearLayout
+            android:layout_marginRight="30dp"
             android:id="@+id/lists_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/lists_button"
-            android:background="@null"/>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/list_white"
+                android:layout_width="90dp"
+                android:layout_height="90dp" />
+
+            <TextView
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:text="@string/lists"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/graphs_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/graph_white"
+                android:layout_width="90dp"
+                android:layout_height="90dp" />
+
+            <TextView
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:text="@string/graphs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
