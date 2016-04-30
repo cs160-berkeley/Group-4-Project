@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroundGrey"
     android:layout_height="match_parent">
@@ -53,6 +55,23 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <ScrollView
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/reminders_layout"
+            android:layout_width="300dp"
+            android:layout_height="match_parent">
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <Switch
         android:layout_width="wrap_content"

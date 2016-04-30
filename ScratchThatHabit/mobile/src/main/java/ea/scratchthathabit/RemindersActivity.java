@@ -16,7 +16,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
+
+import java.util.LinkedHashMap;
 
 /**
  * Created by Sarah on 4/18/2016.
@@ -38,7 +41,11 @@ public class RemindersActivity extends Activity {
     private boolean pushType;
     private Switch mType;
 
+    LinkedHashMap<String, ReminderClass> reminders;
+
+    private LinearLayout remindersLayout;
     ImageButton addBtn;
+    private int requestCode = 1;
 
     NotificationCompat.Builder mBuilder;
     NotificationManager mNotificationManager;
@@ -48,6 +55,14 @@ public class RemindersActivity extends Activity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminders);
+
+        MyApp myApp = (MyApp) getApplicationContext();
+        reminders = myApp.getReminders();
+        if (reminders == null) {
+            reminders = new LinkedHashMap<>();
+            myApp.setReminders(reminders);
+        }
+
         pushReminder = false;
         mPush = (Switch) findViewById(R.id.push);
         mPush.setChecked(false);
@@ -119,14 +134,50 @@ public class RemindersActivity extends Activity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), RemindersActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(getBaseContext(), RemindersCreateActivity.class);
+                intent.putExtra("mode", "create");
+                startActivityForResult(intent, requestCode);
             }
         });
+
+        remindersLayout = (LinearLayout) findViewById(R.id.reminders_layout);
+        populate();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        if (this.requestCode == requestCode) {
+            if (resultCode == RESULT_OK) {
+                String reminderName = data.getStringExtra("remindername");
+                String mode = data.getStringExtra("mode");
+                ReminderClass reminder = reminders.get(reminderName);
+                if (mode.equals("create")) {
+                    addNameView(reminder);
+                }
+            }
+        }
+    }
+
+    private void populate() {
+        for (String s : reminders.keySet()) {
+            ReminderClass reminder = reminders.get(s);
+            addNameView(reminder);
+        }
+    }
+
+    private void addNameView(ReminderClass reminder) {
+        ReminderNameView reminderNameView = new ReminderNameView(this);
+        final String name = reminder.getRName();
+        reminderNameView.setReminderName(name);
+        reminderNameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), RemindersCreateActivity.class);
+                intent.putExtra("mode", "edit");
+                intent.putExtra("remindername", name);
+                startActivityForResult(intent, requestCode);
+            }
+        });
+        remindersLayout.addView(reminderNameView);
     }
 }

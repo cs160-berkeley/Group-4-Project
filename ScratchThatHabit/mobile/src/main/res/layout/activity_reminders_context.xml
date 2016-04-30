@@ -11,13 +11,14 @@
         android:layout_height="match_parent">
 
         <EditText
+            android:imeOptions="actionDone"
+            android:inputType="textFilter"
+            android:singleLine="true"
             android:textColor="@color/text"
             android:layout_centerHorizontal="true"
             android:id="@+id/address_input"
             android:hint=" Address"
-            android:layout_marginTop="10dp"
             android:background="@drawable/edittextstyle"
-            android:inputType="textFilter"
             android:layout_width="200dp"
             android:layout_height="40dp" />
 
@@ -26,7 +27,7 @@
             android:layout_marginTop="10dp"
             android:layout_below="@id/address_input"
             android:id="@+id/arriving_panel"
-            android:layout_width="200dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -34,7 +35,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/arriving"
                 android:textSize="16dp"
-                android:layout_toLeftOf="@+id/arriving"
+                android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -52,7 +53,7 @@
             android:id="@+id/leaving_panel"
             android:layout_marginTop="-5dp"
             android:layout_below="@+id/arriving_panel"
-            android:layout_width="200dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -60,7 +61,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/leaving"
                 android:textSize="16dp"
-                android:layout_toStartOf="@+id/leaving"
+                android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -143,14 +144,14 @@ z
             android:layout_centerHorizontal="true"
             android:layout_below="@id/days_panel"
             android:id="@+id/sound_layout"
-            android:layout_width="200dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content">
 
             <TextView
                 android:textColor="@color/text"
                 android:layout_centerVertical="true"
                 android:text="@string/sound"
-                android:layout_toLeftOf="@+id/sound"
+                android:layout_alignParentLeft="true"
                 android:textSize="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -166,17 +167,18 @@ z
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_marginTop="-5dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/sound_layout"
             android:id="@+id/vibration_layout"
-            android:layout_width="200dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content">
 
             <TextView
                 android:textColor="@color/text"
                 android:textSize="16dp"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/vibration"
+                android:layout_alignParentLeft="true"
                 android:text="@string/vibration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -204,16 +206,17 @@ z
 
             <TextView
                 android:textSize="20dp"
-                android:textColor="@color/text"
+                android:id="@+id/attach_list_text"
                 android:text="@string/attach_list_text"
-                android:id="@+id/attach_text"
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <ImageButton
+                android:id="@+id/attach_button"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/attach_text"
                 android:background="@drawable/add_button"
+                android:layout_toRightOf="@id/attach_list_text"
                 android:layout_width="25dp"
                 android:layout_height="25dp" />
 

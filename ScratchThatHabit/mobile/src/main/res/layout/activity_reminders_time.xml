@@ -21,82 +21,238 @@
 
         <NumberPicker
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/HourPicker"
-            android:layout_marginTop="103dp"
-            android:layout_marginStart="97dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            android:layout_height="100dp"
+            android:layout_toStartOf="@id/MinutePicker"
+            android:id="@+id/HourPicker" />
 
         <NumberPicker
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:id="@+id/MinutePicker"
-            android:layout_alignTop="@+id/HourPicker" />
+            android:layout_alignParentTop="true" />
 
         <NumberPicker
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:id="@+id/AMPMPicker"
-            android:layout_below="@+id/scrollView"
             android:layout_toEndOf="@+id/MinutePicker" />
 
-        <ImageButton
+        <LinearLayout
+            android:layout_below="@id/MinutePicker"
+            android:id="@+id/days_panel"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Monday"
-            android:background="@drawable/mwhite"
-            android:layout_alignTop="@+id/Saturday"
-            android:layout_toStartOf="@+id/Tuesday" />
+            android:layout_height="wrap_content">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Tuesday"
-            android:background="@drawable/twhite"
-            android:layout_alignTop="@+id/Sunday"
-            android:layout_toEndOf="@+id/HourPicker" />
+            <ImageButton
+                android:layout_marginRight="-4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Sunday"
+                android:background="@drawable/swhite"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Wednesday"
-            android:background="@drawable/wwhite"
-            android:layout_alignBottom="@+id/Tuesday"
-            android:layout_toEndOf="@+id/Tuesday" />
+            <ImageButton
+                android:layout_marginLeft="-4dp"
+                android:layout_marginRight="-4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Monday"
+                android:background="@drawable/mwhite" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Thursday"
-            android:background="@drawable/twhite"
-            android:layout_alignTop="@+id/Wednesday"
-            android:layout_toStartOf="@+id/Friday" />
+            <ImageButton
+                android:layout_marginLeft="-4dp"
+                android:layout_marginRight="-4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Tuesday"
+                android:background="@drawable/twhite" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Friday"
-            android:background="@drawable/fwhite"
-            android:layout_alignTop="@+id/Thursday"
-            android:layout_toStartOf="@+id/Saturday" />
+            <ImageButton
+                android:layout_marginLeft="-4dp"
+                android:layout_marginRight="-4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Wednesday"
+                android:background="@drawable/wwhite" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Saturday"
-            android:background="@drawable/swhite"
-            android:layout_below="@+id/AMPMPicker"
-            android:layout_alignEnd="@+id/AMPMPicker" />
+            <ImageButton
+                android:layout_marginLeft="-4dp"
+                android:layout_marginRight="-4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Thursday"
+                android:background="@drawable/twhite" />
 
-        <ImageButton
+            <ImageButton
+                android:layout_marginLeft="-4dp"
+                android:layout_marginRight="-4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Friday"
+                android:background="@drawable/fwhite" />
+
+            <ImageButton
+                android:layout_marginLeft="-4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Saturday"
+                android:background="@drawable/swhite" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/days_panel"
+            android:id="@+id/weekly_layout"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/text"
+                android:layout_centerVertical="true"
+                android:text="@string/weekly"
+                android:layout_alignParentLeft="true"
+                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:buttonTint="@color/checkedTint"
+                android:id="@+id/weekly"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/weekly_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/times_layout"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/add_time_view"
+            android:layout_below="@+id/scrollview"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Sunday"
-            android:background="@drawable/swhite"
-            android:layout_alignBottom="@+id/Monday"
-            android:layout_toStartOf="@+id/Monday" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/add_time_text"
+                android:text="@string/add_time"
+                android:textColor="@color/text"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/add_time_button"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/add_button"
+                android:layout_toRightOf="@id/add_time_text"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/add_time_view"
+            android:id="@+id/sound_layout"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/text"
+                android:layout_centerVertical="true"
+                android:text="@string/sound"
+                android:textSize="16dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:buttonTint="@color/checkedTint"
+                android:id="@+id/sound"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="-5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/sound_layout"
+            android:id="@+id/vibration_layout"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/text"
+                android:textSize="16dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/vibration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <CheckBox
+                android:buttonTint="@color/checkedTint"
+                android:layout_alignParentRight="true"
+                android:id="@+id/vibration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/vibration_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/text"
+                android:textSize="20dp"
+                android:id="@+id/attach_list_text"
+                android:text="@string/attach_list_text"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/attach_list_button"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/add_button"
+                android:layout_toRightOf="@id/attach_list_text"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

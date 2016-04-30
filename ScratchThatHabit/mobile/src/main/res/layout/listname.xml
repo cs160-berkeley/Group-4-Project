@@ -10,13 +10,11 @@
         android:id="@+id/list_name"
         android:textSize="18dp"
         android:padding="10dp"
-        android:text="hello"
         android:layout_width="250dp"
         android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/alarm_img"
-        android:src="@drawable/alarm_grey"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
         android:layout_centerVertical="true"

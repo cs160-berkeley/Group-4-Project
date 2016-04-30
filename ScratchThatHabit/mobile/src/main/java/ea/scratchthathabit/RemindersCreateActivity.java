@@ -1,6 +1,7 @@
 package ea.scratchthathabit;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -13,12 +14,16 @@ import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.ViewFlipper;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 /**
  * Created by Sarah on 4/29/2016.
  */
 public class RemindersCreateActivity extends Activity {
-    
 
+
+    String mode;
     String activity = "ReminderCreate";
     ViewFlipper viewFlipper;
     EditText nameInput;
@@ -26,6 +31,7 @@ public class RemindersCreateActivity extends Activity {
     Button contextToggle;
     String type = "time";
     View currentView;
+    LinkedHashMap<String, ReminderClass> reminders;
 
     int colorPrimaryDark;
     int colorWhite;
@@ -67,12 +73,35 @@ public class RemindersCreateActivity extends Activity {
 
         setContentView(R.layout.activity_reminders_create);
 
+        MyApp myApp = (MyApp) getApplicationContext();
+        reminders = myApp.getReminders();
+        if (reminders == null) {
+            reminders = new LinkedHashMap<>();
+            myApp.setReminders(reminders);
+        }
 
         nameInput = (EditText) findViewById(R.id.RNameInput);
         viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
         currentView = viewFlipper.findViewById(R.id.reminder_time);
 
-        setTimeLayout();
+        Intent intent = new Intent();
+        mode = intent.getStringExtra("mode");
+        if (mode != null && mode.equals("edit")) {
+            String rName = intent.getStringExtra("remindername");
+            Reminder = reminders.get(rName);
+            String rType = Reminder.getType();
+            if (rType.equals("time")) {
+                setTimeLayout();
+            } else {
+                setContextLayout();
+            }
+            populate();
+        } else {
+            Reminder = new ReminderClass();
+            setTimeLayout();
+        }
+
+
         save = (ImageButton) findViewById(R.id.btn_save);
         close = (ImageButton) findViewById(R.id.btn_close);
 
@@ -135,8 +164,8 @@ public class RemindersCreateActivity extends Activity {
 
     public void setTimeLayout() {
         Log.d(activity, "Setting time layout");
-        Reminder = new ReminderClass();
         findDays();
+        findAlarmType();
 
         HourPicker = (NumberPicker) findViewById(R.id.HourPicker);
         HourPicker.setMaxValue(12);
@@ -160,17 +189,38 @@ public class RemindersCreateActivity extends Activity {
         });
     }
 
+    public void findAlarmType() {
+        vibration = (CheckBox) currentView.findViewById(R.id.vibration);
+        sound = (CheckBox) currentView.findViewById(R.id.sound);
+    }
+
     public void setContextLayout() {
         Log.d(activity, "Setting context layout");
-        Reminder = new ReminderClass();
         findDays();
+        findAlarmType();
 
-        addressInput = (EditText) findViewById(R.id.address_input);
+        addressInput = (EditText) currentView.findViewById(R.id.address_input);
     }
 
     public void onSave() {
         String name = nameInput.getText().toString();
+        if (name.equals("")) {
+            return;
+        }
         Reminder.setRName(name);
+        Reminder.setType(type);
+
+        reminders.put(name, Reminder);
+
+
+        Intent intent = new Intent();
+
+        intent.putExtra("mode", mode);
+        intent.putExtra("remindername", name);
+
+
+        setResult(RESULT_OK, intent);
+        Log.d(activity, "mode: " + intent.getStringExtra("mode") + "\nremindername: " + intent.getStringExtra("remindername"));
         finish();
     }
 
@@ -310,6 +360,10 @@ public class RemindersCreateActivity extends Activity {
         Thursday.setOnClickListener(THBL);
         Friday.setOnClickListener(FBL);
         Saturday.setOnClickListener(SatBL);
+    }
+
+    public void populate() {
+
     }
 
 }
