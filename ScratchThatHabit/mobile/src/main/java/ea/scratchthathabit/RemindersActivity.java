@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 /**
@@ -37,6 +38,12 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
     // toggle to push timed(FALSE)/contextual(TRUE) reminder
     private boolean pushType;
     private Switch mType;
+
+    private LinearLayout nN;
+    private LinearLayout nW;
+    private LinearLayout nL;
+    private LinearLayout nG;
+
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -94,7 +101,61 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
             }
         });
 
+
+
+
+        nN = (LinearLayout) findViewById(R.id.nag_notifcations);
+        nW = (LinearLayout) findViewById(R.id.nag_weather);
+        nL = (LinearLayout) findViewById(R.id.nag_lists);
+        nG = (LinearLayout) findViewById(R.id.nag_graphs);
+
+
+        nW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                weather(v);
+            }
+        });
+
+        nL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lists(v);
+            }
+        });
+
+        nG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                graphs(v);
+            }
+        });
+
         //mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+    }
+
+    public void weather(View view ) {
+        Intent intent = new Intent(this, WeatherActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void lists(View view ) {
+        Intent intent = new Intent(this, ListsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void graphs(View view ) {
+        Intent intent = new Intent(this, GraphActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void reminders(View view ) {
+        Intent intent = new Intent(this, RemindersActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 /**
     @Override

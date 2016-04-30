@@ -1,6 +1,15 @@
 package ea.scratchthathabit;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.view.GestureDetectorCompat;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+
+
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created by tiffanielo on 4/26/16.
@@ -12,9 +21,10 @@ public class ReminderClass {
     int RMinute;
     ItemList itemList;
 
+
     public ReminderClass(String RName){
         // This constructor has one parameter, name.
-        System.out.println("Passed Name is :" + RName );
+        System.out.println("Passed Name is :" + RName);
         this.RName = RName;
     }
 
