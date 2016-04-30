@@ -1,36 +1,43 @@
 package ea.scratchthathabit;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
-
+import android.widget.ViewFlipper;
 
 /**
- * Created by Sarah on 4/18/2016.
- * Edited by Tiffanie on 4/26/2016.
+ * Created by Sarah on 4/29/2016.
  */
-public class RemindersTimeActivity extends Activity {
+public class RemindersCreateActivity extends Activity {
+    
 
-    private GestureDetectorCompat mDetector;
-    ReminderClass Reminder;
-    EditText ReminderNameInput;
-    NumberPicker HourPicker;
-    NumberPicker MinutePicker;
-    NumberPicker AMPMPicker;
-    String[] arrayString;
+    String activity = "ReminderCreate";
+    ViewFlipper viewFlipper;
+    EditText nameInput;
+    Button timeToggle;
+    Button contextToggle;
+    String type = "time";
+    View currentView;
 
+    int colorPrimaryDark;
+    int colorWhite;
+    int colorText;
+
+    ImageButton save;
+    ImageButton close;
+
+    CheckBox vibration;
+    CheckBox sound;
+
+//    day buttons
     ImageButton Sunday;
     ImageButton Monday;
     ImageButton Tuesday;
@@ -39,38 +46,105 @@ public class RemindersTimeActivity extends Activity {
     ImageButton Friday;
     ImageButton Saturday;
 
-    private AlarmManager alarmMgr;
-    private PendingIntent alarmIntent;
+//    reminder data
+    ReminderClass Reminder;
+    String[] arrayString;
+
+//    time specific
+    NumberPicker HourPicker;
+    NumberPicker MinutePicker;
+    NumberPicker AMPMPicker;
+
+    //    context specific
+    CheckBox arriving;
+    CheckBox leaving;
+    EditText addressInput;
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reminders_time);
-        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
-        //implemented ReminderClass that represents a reminder
-        //Use HourPicker:MinutePicker for time reminder is set off
-        //Use AMPMPicker to choose AM/PM
-        //Calendar?? for dates... no built in android widget for days of week/onofftoggle buttons with Text
+
+        setContentView(R.layout.activity_reminders_create);
 
 
-        ReminderNameInput = (EditText) findViewById(R.id.RNameInput);
-        String RName = ReminderNameInput.getText().toString();
-        Reminder = new ReminderClass(RName);
-        //System.out.printf("EXCUSE ME: %s", Reminder.getRName());
-        System.out.println("HEYGOTHERE");
-        Reminder.setRName(RName);
-        String theName = Reminder.getRName();
-        System.out.printf("%s", theName);
+        nameInput = (EditText) findViewById(R.id.RNameInput);
+        viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
+        currentView = viewFlipper.findViewById(R.id.reminder_time);
+
+        setTimeLayout();
+        save = (ImageButton) findViewById(R.id.btn_save);
+        close = (ImageButton) findViewById(R.id.btn_close);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSave();
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        timeToggle = (Button) findViewById(R.id.time_toggle);
+        contextToggle = (Button) findViewById(R.id.context_toggle);
+
+        colorPrimaryDark = ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark);
+        colorWhite = ContextCompat.getColor(getBaseContext(), R.color.white);
+        colorText = ContextCompat.getColor(getBaseContext(), R.color.text);
+
+        timeToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(activity, "Time mode started");
+                if (!type.equals("time")) {
+                    viewFlipper.setDisplayedChild(0);
+                    currentView = viewFlipper.findViewById(R.id.reminder_time);
+                    type = "time";
+                    timeToggle.getBackground().setColorFilter(colorPrimaryDark, PorterDuff.Mode.MULTIPLY);
+                    timeToggle.setTextColor(colorWhite);
+                    contextToggle.getBackground().setColorFilter(colorWhite, PorterDuff.Mode.MULTIPLY);
+                    contextToggle.setTextColor(colorText);
+                    setTimeLayout();
+                }
+            }
+        });
+
+        contextToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(activity, "Context mode started");
+                if (!type.equals(("context"))) {
+                    viewFlipper.setDisplayedChild(1);
+                    currentView = viewFlipper.findViewById(R.id.reminder_context);
+                    type = "context";
+                    timeToggle.getBackground().setColorFilter(colorWhite, PorterDuff.Mode.MULTIPLY);
+                    timeToggle.setTextColor(colorText);
+                    contextToggle.getBackground().setColorFilter(colorPrimaryDark, PorterDuff.Mode.MULTIPLY);
+                    contextToggle.setTextColor(colorWhite);
+                    setContextLayout();
+                }
+            }
+        });
+    }
+
+    public void setTimeLayout() {
+        Log.d(activity, "Setting time layout");
+        Reminder = new ReminderClass();
+        findDays();
+
         HourPicker = (NumberPicker) findViewById(R.id.HourPicker);
         HourPicker.setMaxValue(12);
         HourPicker.setMinValue(1);
-        int Hour = HourPicker.getValue();
-        Reminder.setRHour(Hour);
+
         MinutePicker = (NumberPicker) findViewById(R.id.MinutePicker);
         MinutePicker.setMaxValue(59);
         MinutePicker.setMinValue(0);
-        int Min = MinutePicker.getValue();
-        Reminder.setRMinute(Min);
 
         AMPMPicker = (NumberPicker) findViewById(R.id.AMPMPicker);
         arrayString = new String[]{"AM", "PM"};
@@ -84,23 +158,37 @@ public class RemindersTimeActivity extends Activity {
                 return arrayString[value];
             }
         });
+    }
 
-        //How to set off the alarm? (For each reminder)..?
+    public void setContextLayout() {
+        Log.d(activity, "Setting context layout");
+        Reminder = new ReminderClass();
+        findDays();
 
+        addressInput = (EditText) findViewById(R.id.address_input);
+    }
+
+    public void onSave() {
+        String name = nameInput.getText().toString();
+        Reminder.setRName(name);
+        finish();
+    }
+
+    public void findDays() {
         //GETDAYS:
-        Sunday = (ImageButton) findViewById(R.id.Sunday);
+        Sunday = (ImageButton) currentView.findViewById(R.id.Sunday);
         Sunday.setTag(R.drawable.swhite);
-        Monday = (ImageButton) findViewById(R.id.Monday);
+        Monday = (ImageButton) currentView.findViewById(R.id.Monday);
         Monday.setTag(R.drawable.mwhite);
-        Tuesday = (ImageButton) findViewById(R.id.Tuesday);
+        Tuesday = (ImageButton) currentView.findViewById(R.id.Tuesday);
         Tuesday.setTag(R.drawable.twhite);
-        Wednesday = (ImageButton) findViewById(R.id.Wednesday);
+        Wednesday = (ImageButton) currentView.findViewById(R.id.Wednesday);
         Wednesday.setTag(R.drawable.wwhite);
-        Thursday = (ImageButton) findViewById(R.id.Thursday);
+        Thursday = (ImageButton) currentView.findViewById(R.id.Thursday);
         Thursday.setTag(R.drawable.twhite);
-        Friday = (ImageButton) findViewById(R.id.Friday);
+        Friday = (ImageButton) currentView.findViewById(R.id.Friday);
         Friday.setTag(R.drawable.fwhite);
-        Saturday = (ImageButton) findViewById(R.id.Saturday);
+        Saturday = (ImageButton) currentView.findViewById(R.id.Saturday);
         Saturday.setTag(R.drawable.swhite);
 
         View.OnClickListener SunbuttonListener = new View.OnClickListener() {
@@ -222,49 +310,6 @@ public class RemindersTimeActivity extends Activity {
         Thursday.setOnClickListener(THBL);
         Friday.setOnClickListener(FBL);
         Saturday.setOnClickListener(SatBL);
-
-
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
-        Log.d("Gestures", "in onTouchEvent");
-        this.mDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
-
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final String DEBUG_TAG = "Gestures";
-
-        @Override
-        public boolean onDown(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDown: " + event.toString());
-            return true;
-        }
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent event) {
-            Intent sendIntent = new Intent(getBaseContext(), RemindersActivity.class);
-            startActivity(sendIntent);
-            return true;
-        }
-
-        @Override
-        public boolean onDoubleTapEvent(MotionEvent e) {
-            Intent sendIntent = new Intent(getBaseContext(), ListsActivity.class);
-            startActivity(sendIntent);
-            return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            return true;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent ev) {
-            Intent sendIntent = new Intent(getBaseContext(), RemindersContextActivity.class);
-            startActivity(sendIntent);
-        }
-    }
 }

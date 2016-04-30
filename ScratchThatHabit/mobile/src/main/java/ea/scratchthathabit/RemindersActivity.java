@@ -28,11 +28,8 @@ import android.widget.Switch;
  * works once reminders/lists fully implemented. Also created switches for use during demo.
  */
 
-public class RemindersActivity extends Activity /*implements GestureDetector.OnDoubleTapListener, GestureDetector.OnGestureListener*/ {
+public class RemindersActivity extends Activity {
 
-    private GestureDetectorCompat mDetector;
-    // following button and switches are for use during demo
-    // mReminder will be replaced once ReminderActivity is implemented
     private Button mReminder;
     // toggle to push reminder to wear instead of opening edit view
     private boolean pushReminder;
@@ -40,6 +37,8 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
     // toggle to push timed(FALSE)/contextual(TRUE) reminder
     private boolean pushType;
     private Switch mType;
+
+    ImageButton addBtn;
 
     NotificationCompat.Builder mBuilder;
     NotificationManager mNotificationManager;
@@ -114,47 +113,20 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
                 }
             }
         });
-    }
-}
 
-/**
-public class RemindersActivity extends AppCompatActivity implements GestureDetector.OnDoubleTapListener {
-    private ImageButton btn;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        System.out.println("Reminders activity started");
-        setContentView(R.layout.activity_reminders);
-        btn = (ImageButton) findViewById(R.id.btn);
-        btn.setOnLongClickListener(new View.OnLongClickListener() {
+
+        addBtn = (ImageButton) findViewById(R.id.btn_add);
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                onClick3(v);
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), RemindersActivity.class);
+                startActivity(intent);
             }
         });
     }
-    public void onClick(View view ) {
-        Intent intent = new Intent(this, RemindersTimeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-    public void onClick3(View view ) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
+
     @Override
-    public boolean onSingleTapConfirmed(MotionEvent e) {
-        return false;
-    }
-    @Override
-    public boolean onDoubleTap(MotionEvent e) {
-        return false;
-    }
-    @Override
-    public boolean onDoubleTapEvent(MotionEvent e) {
-        return false;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
-*/

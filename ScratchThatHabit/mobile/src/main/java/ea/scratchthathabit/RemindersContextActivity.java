@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -68,13 +69,13 @@ public class RemindersContextActivity extends Activity {
         View.OnClickListener SunbuttonListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(activity, "Sunday clicked");
 
-                if ((Integer)Sunday.getTag() == ((R.drawable.swhite))) {
+                if ((Integer) Sunday.getTag() == ((R.drawable.swhite))) {
                     Sunday.setBackgroundResource(R.drawable.sgreen);
                     Sunday.setTag(R.drawable.sgreen);
                     Reminder.addRDay("Sunday");
-                }
-                else {
+                } else {
                     Sunday.setBackgroundResource(R.drawable.swhite);
                     Sunday.setTag(R.drawable.swhite);
                     Reminder.removeRDay("Sunday");
@@ -187,6 +188,15 @@ public class RemindersContextActivity extends Activity {
                 onSave();
             }
         });
+
+        Sunday.setOnClickListener(SunbuttonListener);
+        Monday.setOnClickListener(MBL);
+        Tuesday.setOnClickListener(TuBL);
+        Wednesday.setOnClickListener(WBL);
+        Thursday.setOnClickListener(THBL);
+        Friday.setOnClickListener(FBL);
+        Saturday.setOnClickListener(SatBL);
+
 
     }
 

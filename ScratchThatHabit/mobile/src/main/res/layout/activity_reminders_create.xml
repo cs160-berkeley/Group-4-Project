@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backgroundGrey"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/close_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:text="@string/create_reminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/btn_save"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/save_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <View
+                android:background="@color/colorPrimaryDark"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:textColor="@color/text"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textFilter"
+        android:id="@+id/RNameInput"
+        android:textAlignment="center"
+        android:hint="Reminder Name"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/edittextstyle"
+        android:layout_width="200dp"
+        android:layout_height="40dp" />
+
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/RNameInput"
+        android:id="@+id/toggle_reminder_panel"
+        android:layout_width="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="@string/time"
+            android:layout_marginRight="-8dp"
+            android:id="@+id/time_toggle"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/context_toggle"
+            android:backgroundTint="@color/white"
+            android:text="@string/context"
+            android:textColor="@color/text"
+            android:layout_toEndOf="@id/time_toggle"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/reminder_time"
+            layout="@layout/activity_reminders_time" />
+
+        <include
+            android:id="@+id/reminder_context"
+            layout="@layout/activity_reminders_context" />
+
+
+    </ViewFlipper>
+
+
+</LinearLayout>
