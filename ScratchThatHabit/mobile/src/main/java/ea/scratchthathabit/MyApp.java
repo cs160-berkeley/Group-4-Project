@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 public class MyApp extends Application {
 
     private LinkedHashMap<String, ItemList> lists;
+    private LinkedHashMap<String, ReminderClass> reminders;
 
 
     public LinkedHashMap<String, ItemList> getLists() {
@@ -20,5 +21,13 @@ public class MyApp extends Application {
 
     public void setLists(LinkedHashMap<String, ItemList> lists) {
         this.lists = lists;
+    }
+
+    public LinkedHashMap<String, ReminderClass> getReminders() {
+        return reminders;
+    }
+
+    public void setReminders(LinkedHashMap<String, ReminderClass> reminders) {
+        this.reminders = reminders;
     }
 }

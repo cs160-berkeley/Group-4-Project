@@ -17,9 +17,19 @@ import java.util.LinkedHashMap;
 public class ReminderClass {
     String RName;
     ArrayList<String> RDays = new ArrayList<String>();
+    String type;
     int RHour;
     int RMinute;
+    boolean weekly;
+    boolean sound;
+    boolean vibration;
+    boolean arriving;
+    boolean leaving;
     ItemList itemList;
+    String address;
+
+    public ReminderClass() {
+    }
 
 
     public ReminderClass(String RName){
@@ -88,5 +98,53 @@ public class ReminderClass {
 
     public boolean hasItemList() {
         return itemList != null;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setArriving(boolean arriving) {
+        this.arriving = arriving;
+    }
+
+    public void setLeaving(boolean leaving) {
+        this.leaving = leaving;
+    }
+
+    public boolean isArriving() {
+        return arriving;
+    }
+
+    public boolean isLeaving() {
+        return leaving;
+    }
+
+    public boolean isSound() {
+        return sound;
+    }
+
+    public boolean isVibration() {
+        return vibration;
+    }
+
+    public void setWeekly(boolean weekly) {
+        this.weekly = weekly;
+    }
+
+    public boolean isWeekly() {
+        return weekly;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }
