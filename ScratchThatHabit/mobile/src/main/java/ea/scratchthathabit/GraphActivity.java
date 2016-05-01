@@ -73,12 +73,6 @@ public class GraphActivity extends Activity {
             }
         });
 
-        nG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                graphs(v);
-            }
-        });
 
         nN.setOnClickListener(new View.OnClickListener() {
             @Override

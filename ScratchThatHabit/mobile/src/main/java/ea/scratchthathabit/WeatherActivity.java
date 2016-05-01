@@ -69,12 +69,6 @@ public class WeatherActivity extends Activity implements  GoogleApiClient.Connec
         nG = (LinearLayout) findViewById(R.id.nag_graphs);
 
 
-        nW.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                weather(v);
-            }
-        });
 
         nL.setOnClickListener(new View.OnClickListener() {
             @Override

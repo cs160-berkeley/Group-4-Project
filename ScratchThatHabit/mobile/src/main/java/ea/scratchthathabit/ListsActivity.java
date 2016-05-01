@@ -48,12 +48,6 @@ public class ListsActivity extends Activity {
             }
         });
 
-        nL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lists(v);
-            }
-        });
 
         nG.setOnClickListener(new View.OnClickListener() {
             @Override
