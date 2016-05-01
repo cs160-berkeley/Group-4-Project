@@ -179,16 +179,6 @@ public class RemindersContextActivity extends Activity {
             }
         };
 
-        save = (ImageButton) findViewById(R.id.btn_save);
-        close = (ImageButton) findViewById(R.id.btn_close);
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSave();
-            }
-        });
-
         Sunday.setOnClickListener(SunbuttonListener);
         Monday.setOnClickListener(MBL);
         Tuesday.setOnClickListener(TuBL);
@@ -197,14 +187,6 @@ public class RemindersContextActivity extends Activity {
         Friday.setOnClickListener(FBL);
         Saturday.setOnClickListener(SatBL);
 
-
-    }
-
-    public void onSave() {
-
-    }
-
-    public void onClose() {
 
     }
 

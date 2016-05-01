@@ -1,11 +1,13 @@
 package ea.scratchthathabit;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.GestureDetector;
@@ -13,7 +15,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
+
+import java.util.LinkedHashMap;
 
 /**
  * Created by Sarah on 4/18/2016.
@@ -25,7 +30,7 @@ import android.widget.Switch;
  * works once reminders/lists fully implemented. Also created switches for use during demo.
  */
 
-public class RemindersActivity extends Activity /*implements GestureDetector.OnDoubleTapListener, GestureDetector.OnGestureListener*/ {
+public class RemindersActivity extends Activity {
 
     private GestureDetectorCompat mDetector;
     // following button and switches are for use during demo
@@ -38,10 +43,30 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
     private boolean pushType;
     private Switch mType;
 
+
+    LinkedHashMap<String, ReminderClass> reminders;
+
+    private LinearLayout remindersLayout;
+    ImageButton addBtn;
+    private int requestCode = 1;
+
+    NotificationCompat.Builder mBuilder;
+    NotificationManager mNotificationManager;
+    int mId;
+
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminders);
+
+        MyApp myApp = (MyApp) getApplicationContext();
+        reminders = myApp.getReminders();
+        if (reminders == null) {
+            reminders = new LinkedHashMap<>();
+            myApp.setReminders(reminders);
+        }
+
         pushReminder = false;
         mPush = (Switch) findViewById(R.id.push);
         mPush.setChecked(false);
@@ -94,89 +119,57 @@ public class RemindersActivity extends Activity /*implements GestureDetector.OnD
             }
         });
 
-        //mDetector = new GestureDetectorCompat(this, new MyGestureListener());
-    }
-/**
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        Log.d("Gestures", "in onTouchEvent");
-        this.mDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final String DEBUG_TAG = "Gestures";
-        @Override
-        public boolean onDown(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDown: " + event.toString());
-            return true;
-        }
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent event) {
-            Intent sendIntent = new Intent(getBaseContext(), RemindersTimeActivity.class);
-            startActivity(sendIntent);
-            return true;
-        }
-        @Override
-        public boolean onDoubleTapEvent(MotionEvent e) {
-            Intent sendWearIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-            sendWearIntent.putExtra("TYPE", "Timed");
-            startService(sendWearIntent);
-            return true;
-        }
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            Intent sendWearIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-            sendWearIntent.putExtra("TYPE", "Context");
-            startService(sendWearIntent);
-            return true;
-        }
-        @Override
-        public void onLongPress(MotionEvent ev) {
-            Intent sendIntent = new Intent(getBaseContext(), MainActivity.class);
-            startActivity(sendIntent);
-        }
-    }
-        */
-}
-
-/**
-public class RemindersActivity extends AppCompatActivity implements GestureDetector.OnDoubleTapListener {
-    private ImageButton btn;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        System.out.println("Reminders activity started");
-        setContentView(R.layout.activity_reminders);
-        btn = (ImageButton) findViewById(R.id.btn);
-        btn.setOnLongClickListener(new View.OnLongClickListener() {
+        addBtn = (ImageButton) findViewById(R.id.btn_add);
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                onClick3(v);
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), RemindersCreateActivity.class);
+                intent.putExtra("mode", "create");
+                startActivityForResult(intent, requestCode);
             }
         });
+
+        remindersLayout = (LinearLayout) findViewById(R.id.reminders_layout);
+        populate();
+
     }
-    public void onClick(View view ) {
-        Intent intent = new Intent(this, RemindersTimeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-    public void onClick3(View view ) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
+
     @Override
-    public boolean onSingleTapConfirmed(MotionEvent e) {
-        return false;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (this.requestCode == requestCode) {
+            if (resultCode == RESULT_OK) {
+                String reminderName = data.getStringExtra("remindername");
+                String mode = data.getStringExtra("mode");
+                ReminderClass reminder = reminders.get(reminderName);
+                if (mode.equals("create")) {
+                    addNameView(reminder);
+                }
+            }
+        }
     }
-    @Override
-    public boolean onDoubleTap(MotionEvent e) {
-        return false;
+
+    private void populate() {
+        for (String s : reminders.keySet()) {
+            ReminderClass reminder = reminders.get(s);
+            addNameView(reminder);
+        }
     }
-    @Override
-    public boolean onDoubleTapEvent(MotionEvent e) {
-        return false;
+
+    private void addNameView(ReminderClass reminder) {
+        ReminderNameView reminderNameView = new ReminderNameView(this);
+        final String name = reminder.getRName();
+        reminderNameView.setReminderName(name);
+        reminderNameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), RemindersCreateActivity.class);
+                intent.putExtra("mode", "edit");
+                intent.putExtra("remindername", name);
+                startActivityForResult(intent, requestCode);
+            }
+        });
+        remindersLayout.addView(reminderNameView);
     }
+
 }
-*/
+
