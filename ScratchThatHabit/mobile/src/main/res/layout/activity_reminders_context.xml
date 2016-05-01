@@ -7,6 +7,8 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -75,72 +77,167 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:descendantFocusability="afterDescendants"
+            android:elevation="2dp"
+            android:background="@color/backgroundGrey"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layout_below="@id/leaving_panel"
             android:id="@+id/days_panel"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/leaving_panel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageButton
-                android:layout_marginRight="-4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Sunday"
-                android:background="@drawable/swhite"/>
+            <LinearLayout
+                android:descendantFocusability="beforeDescendants"
+                android:tag="@string/tagSunday"
+                android:id="@+id/SundayLayout"
+                android:elevation="5dp"
+                android:background="@color/white"
+                android:layout_width="35dp"
+                android:layout_height="40dp">
 
-            <ImageButton
-                android:layout_marginLeft="-4dp"
-                android:layout_marginRight="-4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Monday"
-                android:background="@drawable/mwhite" />
+                <TextView
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:text="@string/s"
+                    android:textSize="28sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-            <ImageButton
-                android:layout_marginLeft="-4dp"
-                android:layout_marginRight="-4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Tuesday"
-                android:background="@drawable/twhite" />
+            </LinearLayout>
 
-            <ImageButton
-                android:layout_marginLeft="-4dp"
-                android:layout_marginRight="-4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Wednesday"
-                android:background="@drawable/wwhite" />
+            <LinearLayout
+                android:layout_marginLeft="1dp"
+                android:descendantFocusability="beforeDescendants"
+                android:tag="@string/tagMonday"
+                android:id="@+id/MondayLayout"
+                android:elevation="5dp"
+                android:background="@color/white"
+                android:layout_width="35dp"
+                android:layout_height="40dp">
 
-            <ImageButton
-                android:layout_marginLeft="-4dp"
-                android:layout_marginRight="-4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Thursday"
-                android:background="@drawable/twhite" />
+                <TextView
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:text="@string/m"
+                    android:textSize="28sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-            <ImageButton
-                android:layout_marginLeft="-4dp"
-                android:layout_marginRight="-4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Friday"
-                android:background="@drawable/fwhite" />
+            </LinearLayout>
 
-            <ImageButton
-                android:layout_marginLeft="-4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Saturday"
-                android:background="@drawable/swhite" />
+            <LinearLayout
+                android:layout_marginLeft="1dp"
+                android:descendantFocusability="beforeDescendants"
+                android:tag="@string/tagTuesday"
+                android:id="@+id/TuesdayLayout"
+                android:elevation="5dp"
+                android:background="@color/white"
+                android:layout_width="35dp"
+                android:layout_height="40dp">
 
-z
+                <TextView
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:text="@string/t"
+                    android:textSize="28sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="1dp"
+                android:descendantFocusability="beforeDescendants"
+                android:tag="@string/tagWednesday"
+                android:id="@+id/WednesdayLayout"
+                android:elevation="5dp"
+                android:background="@color/white"
+                android:layout_width="35dp"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:text="@string/w"
+                    android:textSize="28sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="1dp"
+                android:descendantFocusability="beforeDescendants"
+                android:tag="@string/tagThursday"
+                android:id="@+id/ThursdayLayout"
+                android:elevation="5dp"
+                android:background="@color/white"
+                android:layout_width="35dp"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:text="@string/t"
+                    android:textSize="28sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="1dp"
+                android:descendantFocusability="beforeDescendants"
+                android:tag="@string/tagFriday"
+                android:id="@+id/FridayLayout"
+                android:elevation="5dp"
+                android:background="@color/white"
+                android:layout_width="35dp"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:text="@string/f"
+                    android:textSize="28sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="1dp"
+                android:descendantFocusability="beforeDescendants"
+                android:tag="@string/tagSaturday"
+                android:id="@+id/SaturdayLayout"
+                android:elevation="5dp"
+                android:background="@color/white"
+                android:layout_width="35dp"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:text="@string/s"
+                    android:textSize="28sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <RelativeLayout
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/days_panel"
             android:id="@+id/sound_layout"
@@ -213,7 +310,7 @@ z
                 android:layout_height="wrap_content" />
 
             <ImageButton
-                android:id="@+id/attach_button"
+                android:id="@+id/attach_list_button"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/add_button"
                 android:layout_toRightOf="@id/attach_list_text"

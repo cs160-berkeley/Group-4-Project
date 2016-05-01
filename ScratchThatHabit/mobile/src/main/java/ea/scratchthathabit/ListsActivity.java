@@ -19,6 +19,8 @@ import java.util.LinkedHashMap;
 
 public class ListsActivity extends Activity {
 
+    private String mode;
+
     private android.support.v7.widget.Toolbar toolbar;
     private LinearLayout listLayout;
     private LinkedHashMap<String, ItemList> lists;
@@ -30,10 +32,15 @@ public class ListsActivity extends Activity {
     private LinearLayout nL;
     private LinearLayout nG;
 
+    private ImageButton closeBtn;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lists);
+
+        Intent intent = getIntent();
+        mode = intent.getStringExtra("mode");
 
         nN = (LinearLayout) findViewById(R.id.nag_notifcations);
         nW = (LinearLayout) findViewById(R.id.nag_weather);
@@ -75,6 +82,17 @@ public class ListsActivity extends Activity {
 //        setSupportActionBar(toolbar);
 
         addBtn = (ImageButton) toolbar.findViewById(R.id.toolbar_layout).findViewById(R.id.list_btn_add);
+        closeBtn = (ImageButton) toolbar.findViewById(R.id.toolbar_layout).findViewById(R.id.btn_close);
+        if (mode != null && mode.equals("attach")) {
+            Log.d("Lists", "attaching lists");
+            closeBtn.setVisibility(View.VISIBLE);
+            closeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +116,7 @@ public class ListsActivity extends Activity {
         ListNameView nameView = new ListNameView(this);
         final String name = itemList.getName();
         nameView.setTxt(name);
-        boolean reminder = false;
+        boolean reminder = itemList.hasReminder();
         if (reminder) {
             nameView.setImg(R.drawable.alarm_fill);
         } else {
@@ -108,10 +126,17 @@ public class ListsActivity extends Activity {
         nameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), EditListsActivity.class);
-                intent.putExtra("mode", "edit");
-                intent.putExtra("listname", name);
-                startActivityForResult(intent, requestCode);
+                if (mode != null && mode.equals("attach")) {
+                    Intent intent = new Intent();
+                    intent.putExtra("listname", name);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(getBaseContext(), EditListsActivity.class);
+                    intent.putExtra("mode", "edit");
+                    intent.putExtra("listname", name);
+                    startActivityForResult(intent, requestCode);
+                }
             }
         });
         listLayout.addView(nameView);

@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import java.util.HashMap;
@@ -32,6 +34,7 @@ public class RemindersCreateActivity extends Activity {
     String type = "time";
     View currentView;
     LinkedHashMap<String, ReminderClass> reminders;
+    LinkedHashMap<String, ItemList> lists;
 
     int colorPrimaryDark;
     int colorWhite;
@@ -43,14 +46,8 @@ public class RemindersCreateActivity extends Activity {
     CheckBox vibration;
     CheckBox sound;
 
-//    day buttons
-    ImageButton Sunday;
-    ImageButton Monday;
-    ImageButton Tuesday;
-    ImageButton Wednesday;
-    ImageButton Thursday;
-    ImageButton Friday;
-    ImageButton Saturday;
+    //    day buttons
+    LinearLayout daysPanel;
 
 //    reminder data
     ReminderClass Reminder;
@@ -66,6 +63,15 @@ public class RemindersCreateActivity extends Activity {
     CheckBox leaving;
     EditText addressInput;
 
+    ImageButton attachList;
+
+    int requestCode = 1;
+
+    private LinearLayout nN;
+    private LinearLayout nW;
+    private LinearLayout nL;
+    private LinearLayout nG;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,16 +79,49 @@ public class RemindersCreateActivity extends Activity {
 
         setContentView(R.layout.activity_reminders_create);
 
+        nN = (LinearLayout) findViewById(R.id.nag_notifcations);
+        nW = (LinearLayout) findViewById(R.id.nag_weather);
+        nL = (LinearLayout) findViewById(R.id.nag_lists);
+        nG = (LinearLayout) findViewById(R.id.nag_graphs);
+
+
+        nW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                weather(v);
+            }
+        });
+
+        nL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lists(v);
+            }
+        });
+
+
+        nG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                graphs(v);
+            }
+        });
+
+
         MyApp myApp = (MyApp) getApplicationContext();
         reminders = myApp.getReminders();
+        lists = myApp.getLists();
         if (reminders == null) {
             reminders = new LinkedHashMap<>();
             myApp.setReminders(reminders);
         }
+        if (lists == null) {
+            lists = new LinkedHashMap<>();
+            myApp.setLists(lists);
+        }
 
         nameInput = (EditText) findViewById(R.id.RNameInput);
         viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
-        currentView = viewFlipper.findViewById(R.id.reminder_time);
 
         Intent intent = getIntent();
         mode = intent.getStringExtra("mode");
@@ -91,13 +130,16 @@ public class RemindersCreateActivity extends Activity {
             Reminder = reminders.get(rName);
             String rType = Reminder.getType();
             if (rType.equals("time")) {
+                currentView = viewFlipper.findViewById(R.id.reminder_time);
                 setTimeLayout();
             } else {
+                currentView = viewFlipper.findViewById(R.id.reminder_context);
                 setContextLayout();
             }
             populate();
         } else {
             Reminder = new ReminderClass();
+            currentView = viewFlipper.findViewById(R.id.reminder_time);
             setTimeLayout();
         }
 
@@ -147,7 +189,6 @@ public class RemindersCreateActivity extends Activity {
         contextToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(activity, "Context mode started");
                 if (!type.equals(("context"))) {
                     viewFlipper.setDisplayedChild(1);
                     currentView = viewFlipper.findViewById(R.id.reminder_context);
@@ -160,11 +201,29 @@ public class RemindersCreateActivity extends Activity {
                 }
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (this.requestCode == requestCode) {
+            if (resultCode == RESULT_OK) {
+                String listname = data.getStringExtra("listname");
+                Log.d(activity, listname + " attached");
+                ItemList itemList = lists.get(listname);
+                Reminder.setItemList(itemList);
+
+                //change attachment text/icon here
+                final TextView attachListText = (TextView) currentView.findViewById(R.id.attach_list_text);
+                attachListText.setText("List " + listname + "attached");
+
+                attachList.setBackground(getDrawable(R.drawable.close_button));
+            }
+        }
     }
 
     public void setTimeLayout() {
-        Log.d(activity, "Setting time layout");
-        findDays();
+        setDays();
         findAlarmType();
 
         HourPicker = (NumberPicker) findViewById(R.id.HourPicker);
@@ -187,6 +246,17 @@ public class RemindersCreateActivity extends Activity {
                 return arrayString[value];
             }
         });
+
+        attachList = (ImageButton) currentView.findViewById(R.id.attach_list_button);
+        attachList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ListsActivity.class);
+                intent.putExtra("mode", "attach");
+                startActivityForResult(intent, requestCode);
+
+            }
+        });
     }
 
     public void findAlarmType() {
@@ -195,11 +265,20 @@ public class RemindersCreateActivity extends Activity {
     }
 
     public void setContextLayout() {
-        Log.d(activity, "Setting context layout");
-        findDays();
+        setDays();
         findAlarmType();
 
         addressInput = (EditText) currentView.findViewById(R.id.address_input);
+
+        attachList = (ImageButton) currentView.findViewById(R.id.attach_list_button);
+        attachList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ListsActivity.class);
+                intent.putExtra("mode", "attach");
+                startActivityForResult(intent, requestCode);
+            }
+        });
     }
 
     public void onSave() {
@@ -222,146 +301,61 @@ public class RemindersCreateActivity extends Activity {
         finish();
     }
 
-    public void findDays() {
-        //GETDAYS:
-        Sunday = (ImageButton) currentView.findViewById(R.id.Sunday);
-        Sunday.setTag(R.drawable.swhite);
-        Monday = (ImageButton) currentView.findViewById(R.id.Monday);
-        Monday.setTag(R.drawable.mwhite);
-        Tuesday = (ImageButton) currentView.findViewById(R.id.Tuesday);
-        Tuesday.setTag(R.drawable.twhite);
-        Wednesday = (ImageButton) currentView.findViewById(R.id.Wednesday);
-        Wednesday.setTag(R.drawable.wwhite);
-        Thursday = (ImageButton) currentView.findViewById(R.id.Thursday);
-        Thursday.setTag(R.drawable.twhite);
-        Friday = (ImageButton) currentView.findViewById(R.id.Friday);
-        Friday.setTag(R.drawable.fwhite);
-        Saturday = (ImageButton) currentView.findViewById(R.id.Saturday);
-        Saturday.setTag(R.drawable.swhite);
-
-        View.OnClickListener SunbuttonListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if ((Integer)Sunday.getTag() == ((R.drawable.swhite))) {
-                    Sunday.setBackgroundResource(R.drawable.sgreen);
-                    Sunday.setTag(R.drawable.sgreen);
-                    Reminder.addRDay("Sunday");
+    public void setDays() {
+        daysPanel = (LinearLayout) currentView.findViewById(R.id.days_panel);
+        Log.d(activity,"" + daysPanel.getChildCount());
+        for (int i = 0; i < daysPanel.getChildCount(); i++) {
+            final LinearLayout dayLayout = (LinearLayout) daysPanel.getChildAt(i);
+            final TextView dayText = (TextView) dayLayout.getChildAt(0);
+            dayLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String tag = (String) dayLayout.getTag();
+                    String color = tag.substring(0, 5);
+                    String day = tag.substring(5, tag.length());
+                    if (color.equals("white")) {
+                        dayLayout.setBackgroundColor(colorPrimaryDark);
+                        dayLayout.setTag("green" + day);
+                        dayText.setTextColor(colorWhite);
+                        Reminder.addRDay(day);
+                    } else {
+                        dayLayout.setBackgroundColor(colorWhite);
+                        dayLayout.setTag("white" + day);
+                        dayText.setTextColor(colorText);
+                        Reminder.removeRDay(day);
+                    }
                 }
-                else {
-                    Sunday.setBackgroundResource(R.drawable.swhite);
-                    Sunday.setTag(R.drawable.swhite);
-                    Reminder.removeRDay("Sunday");
-                }
-            }
-        };
-        View.OnClickListener MBL = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if ((Integer)Monday.getTag() == ((R.drawable.mwhite))) {
-                    Monday.setBackgroundResource(R.drawable.mgreen);
-                    Monday.setTag(R.drawable.mgreen);
-                    Reminder.addRDay("Monday");
-                }
-                else {
-                    Monday.setBackgroundResource(R.drawable.mwhite);
-                    Monday.setTag(R.drawable.mwhite);
-                    Reminder.removeRDay("Monday");
-                }
-            }
-        };
-        View.OnClickListener TuBL = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if ((Integer)Tuesday.getTag() == ((R.drawable.twhite))) {
-                    Tuesday.setBackgroundResource(R.drawable.tgreen);
-                    Tuesday.setTag(R.drawable.tgreen);
-                    Reminder.addRDay("Tuesday");
-                }
-                else {
-                    Tuesday.setBackgroundResource(R.drawable.twhite);
-                    Tuesday.setTag(R.drawable.twhite);
-                    Reminder.removeRDay("Tuesday");
-                }
-            }
-        };
-        View.OnClickListener WBL = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if ((Integer)Wednesday.getTag() == ((R.drawable.wwhite))) {
-                    Wednesday.setBackgroundResource(R.drawable.wgreen);
-                    Wednesday.setTag(R.drawable.wgreen);
-                    Reminder.addRDay("Wednesday");
-                }
-                else {
-                    Wednesday.setBackgroundResource(R.drawable.wwhite);
-                    Wednesday.setTag(R.drawable.wwhite);
-                    Reminder.removeRDay("Wednesday");
-                }
-            }
-        };
-        View.OnClickListener THBL = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if ((Integer)Thursday.getTag() == ((R.drawable.twhite))) {
-                    Thursday.setBackgroundResource(R.drawable.tgreen);
-                    Thursday.setTag(R.drawable.tgreen);
-                    Reminder.addRDay("Thursday");
-                }
-                else {
-                    Thursday.setBackgroundResource(R.drawable.twhite);
-                    Thursday.setTag(R.drawable.twhite);
-                    Reminder.removeRDay("Thursday");
-                }
-            }
-        };
-        View.OnClickListener FBL = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if ((Integer)Friday.getTag() == ((R.drawable.fwhite))) {
-                    Friday.setBackgroundResource(R.drawable.fgreen);
-                    Friday.setTag(R.drawable.fgreen);
-                    Reminder.addRDay("Friday");
-                }
-                else {
-                    Friday.setBackgroundResource(R.drawable.fwhite);
-                    Friday.setTag(R.drawable.fwhite);
-                    Reminder.removeRDay("Friday");
-                }
-            }
-        };
-        View.OnClickListener SatBL = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if ((Integer)Saturday.getTag() == ((R.drawable.swhite))) {
-                    Saturday.setBackgroundResource(R.drawable.sgreen);
-                    Saturday.setTag(R.drawable.sgreen);
-                    Reminder.addRDay("Saturday");
-                }
-                else {
-                    Saturday.setBackgroundResource(R.drawable.swhite);
-                    Saturday.setTag(R.drawable.swhite);
-                    Reminder.removeRDay("Saturday");
-                }
-            }
-        };
-        Sunday.setOnClickListener(SunbuttonListener);
-        Monday.setOnClickListener(MBL);
-        Tuesday.setOnClickListener(TuBL);
-        Wednesday.setOnClickListener(WBL);
-        Thursday.setOnClickListener(THBL);
-        Friday.setOnClickListener(FBL);
-        Saturday.setOnClickListener(SatBL);
+            });
+        }
     }
+
 
     public void populate() {
         nameInput.setText(Reminder.getRName());
+    }
+
+    public void weather(View view ) {
+        Intent intent = new Intent(this, WeatherActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void lists(View view ) {
+        Intent intent = new Intent(this, ListsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void graphs(View view ) {
+        Intent intent = new Intent(this, GraphActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void reminders(View view ) {
+        Intent intent = new Intent(this, RemindersActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }

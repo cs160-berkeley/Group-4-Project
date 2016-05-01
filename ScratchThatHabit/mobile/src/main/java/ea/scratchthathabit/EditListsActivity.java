@@ -2,6 +2,7 @@ package ea.scratchthathabit;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,15 +25,18 @@ public class EditListsActivity extends Activity {
 
     private String activity = "EditList";
     private LinkedHashMap<String, ItemList> lists;
+    private LinkedHashMap<String, ReminderClass> reminders;
     private EditText enterListName;
     private EditText enterItem;
     private LinearLayout listItems;
     private ArrayList<String> items;
     private ItemList itemList;
     private ImageButton addItemBtn;
+    private ImageButton attachListBtn;
     private ImageButton saveBtn;
     private ImageButton closeBtn;
     private String mode;
+    private int requestCode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,9 +46,14 @@ public class EditListsActivity extends Activity {
 
         MyApp myApp = (MyApp) getApplicationContext();
         lists = myApp.getLists();
+        reminders = myApp.getReminders();
         if (lists == null) {
             lists = new LinkedHashMap<>();
             myApp.setLists(lists);
+        }
+        if (reminders == null) {
+            reminders = new LinkedHashMap<>();
+            myApp.setReminders(reminders);
         }
 
         setContentView(R.layout.activity_edit_lists);
@@ -84,6 +93,33 @@ public class EditListsActivity extends Activity {
                 onClose();
             }
         });
+
+        attachListBtn = (ImageButton) findViewById(R.id.attach_reminder_button);
+        attachListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), RemindersActivity.class);
+                intent.putExtra("mode", "attach");
+                startActivityForResult(intent, requestCode);
+            }
+        });
+
+        itemList = new ItemList();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (this.requestCode == requestCode) {
+            if (resultCode == RESULT_OK) {
+                String reminderName = data.getStringExtra("remindername");
+                Log.d(activity, "reminder " + reminderName + " attached");
+                ReminderClass reminderClass = reminders.get(reminderName);
+                itemList.setReminder(reminderClass);
+
+//                change ui to indicate attached reminder
+
+            }
+        }
     }
 
     public void populate() {
@@ -122,7 +158,8 @@ public class EditListsActivity extends Activity {
                 lists.remove(oldName);
             }
         }
-        itemList = new ItemList(name, items);
+        itemList.setName(name);
+        itemList.setList(items);
         lists.put(name, itemList);
         intent.putExtra("listname", name);
         intent.putExtra("mode", mode);

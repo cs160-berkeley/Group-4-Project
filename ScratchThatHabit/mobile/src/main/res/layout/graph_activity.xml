@@ -52,18 +52,19 @@
         <Button
             android:layout_width="90dp"
             android:layout_height="45dp"
-            android:text="Day"
+            android:text="@string/day"
             android:id="@+id/day"
-            android:background="#1ab8bf"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
             android:layout_alignTop="@+id/month"
             android:layout_toStartOf="@+id/month" />
 
         <Button
             android:layout_width="90dp"
             android:layout_height="45dp"
-            android:text="Month"
+            android:text="@string/month"
             android:id="@+id/month"
-            android:background="#ffffff"
+            android:background="@color/white"
             android:layout_marginTop="25dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
@@ -71,9 +72,9 @@
         <Button
             android:layout_width="90dp"
             android:layout_height="45dp"
-            android:text="Year"
+            android:text="@string/year"
             android:id="@+id/year"
-            android:background="#ffffff"
+            android:background="@color/white"
             android:layout_alignTop="@+id/month"
             android:layout_toEndOf="@+id/month" />
 
@@ -84,7 +85,7 @@
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scratching"
+        android:text="@string/gScratching"
         android:id="@+id/scratchingBox"
         android:checked="true"
         android:buttonTint="#146DE5"
@@ -94,7 +95,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reminders"
+        android:text="@string/gReminders"
         android:id="@+id/remindersBox"
         android:checked="true"
         android:buttonTint="#12CEA2"
@@ -104,7 +105,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pollen Level"
+        android:text="@string/gPollen"
         android:id="@+id/pollenBox"
         android:checked="true"
         android:buttonTint="#14E579"
@@ -114,7 +115,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Temperature"
+        android:text="@string/gTemperature"
         android:id="@+id/temperatureBox"
         android:checked="true"
         android:buttonTint="#1294CE"
@@ -166,65 +167,68 @@
         android:layout_marginTop="150dp"
         android:src="@drawable/reminders_day" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/nav"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
         android:layout_alignParentBottom="true" >
 
         <LinearLayout
             android:id="@+id/nag_notifcations"
             android:background="@color/white"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content">
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
             <ImageView
                 android:src="@drawable/alarm_black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nag_weather"
             android:background="@color/white"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/nag_notifcations">
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:src="@drawable/weather_black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nag_lists"
             android:background="@color/white"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/nag_weather">
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
             <ImageView
                 android:src="@drawable/list_black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nag_graphs"
-            android:background="#1FDCE5"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/nag_lists">
+            android:background="@color/colorPrimary"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:src="@drawable/graph_white"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
 
 
-    </RelativeLayout>
+    </LinearLayout>
+
 </RelativeLayout>
