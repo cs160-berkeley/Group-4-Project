@@ -2,13 +2,12 @@ package ea.scratchthathabit;
 
 import android.app.Activity;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.GestureDetector;
@@ -33,6 +32,9 @@ import java.util.LinkedHashMap;
 
 public class RemindersActivity extends Activity {
 
+    private GestureDetectorCompat mDetector;
+    // following button and switches are for use during demo
+    // mReminder will be replaced once ReminderActivity is implemented
     private Button mReminder;
     // toggle to push reminder to wear instead of opening edit view
     private boolean pushReminder;
@@ -40,6 +42,7 @@ public class RemindersActivity extends Activity {
     // toggle to push timed(FALSE)/contextual(TRUE) reminder
     private boolean pushType;
     private Switch mType;
+
 
     LinkedHashMap<String, ReminderClass> reminders;
 
@@ -50,6 +53,7 @@ public class RemindersActivity extends Activity {
     NotificationCompat.Builder mBuilder;
     NotificationManager mNotificationManager;
     int mId;
+
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -101,26 +105,12 @@ public class RemindersActivity extends Activity {
                         sendWearIntent.putExtra("LIST", "Backpack");
                         sendWearIntent.putExtra("ITEMS", "Water Bottle\nVaseline\nAllergy Pills");
                         startService(sendWearIntent);
-                        mBuilder = new NotificationCompat.Builder(getBaseContext())
-                                .setSmallIcon(R.drawable.notification_icon)
-                                .setContentTitle("Reminder")
-                                .setContentText("Did you bring everything from Backpack?");
-                        mId = 1;
-                        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                        mNotificationManager.notify(mId, mBuilder.build());
                     } else {
                         Intent sendWearIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
                         sendWearIntent.putExtra("TYPE", "Timed");
                         sendWearIntent.putExtra("REMINDER", "Drink Water");
                         sendWearIntent.putExtra("TIME", "2:00 PM");
                         startService(sendWearIntent);
-                        mBuilder = new NotificationCompat.Builder(getBaseContext())
-                                .setSmallIcon(R.drawable.notification_icon)
-                                .setContentTitle("Drink Water")
-                                .setContentText("2:00 PM");
-                        mId = 1;
-                        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                        mNotificationManager.notify(mId, mBuilder.build());
                     }
                 } else {
                     Intent sendIntent = new Intent(getBaseContext(), RemindersTimeActivity.class);
@@ -129,55 +119,8 @@ public class RemindersActivity extends Activity {
             }
         });
 
-
-        addBtn = (ImageButton) findViewById(R.id.btn_add);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), RemindersCreateActivity.class);
-                intent.putExtra("mode", "create");
-                startActivityForResult(intent, requestCode);
-            }
-        });
-
-        remindersLayout = (LinearLayout) findViewById(R.id.reminders_layout);
-        populate();
+        //mDetector = new GestureDetectorCompat(this, new MyGestureListener());
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (this.requestCode == requestCode) {
-            if (resultCode == RESULT_OK) {
-                String reminderName = data.getStringExtra("remindername");
-                String mode = data.getStringExtra("mode");
-                ReminderClass reminder = reminders.get(reminderName);
-                if (mode.equals("create")) {
-                    addNameView(reminder);
-                }
-            }
-        }
-    }
-
-    private void populate() {
-        for (String s : reminders.keySet()) {
-            ReminderClass reminder = reminders.get(s);
-            addNameView(reminder);
-        }
-    }
-
-    private void addNameView(ReminderClass reminder) {
-        ReminderNameView reminderNameView = new ReminderNameView(this);
-        final String name = reminder.getRName();
-        reminderNameView.setReminderName(name);
-        reminderNameView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), RemindersCreateActivity.class);
-                intent.putExtra("mode", "edit");
-                intent.putExtra("remindername", name);
-                startActivityForResult(intent, requestCode);
-            }
-        });
-        remindersLayout.addView(reminderNameView);
-    }
 }
+

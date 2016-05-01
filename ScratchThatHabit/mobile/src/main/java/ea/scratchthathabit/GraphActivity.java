@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 /**
  * Created by Simon Bonzon on 4/20/2016.
@@ -42,10 +43,51 @@ public class GraphActivity extends Activity {
     private final int INVISIBLE = View.INVISIBLE;
     private String interval;
 
+    private LinearLayout nN;
+    private LinearLayout nW;
+    private LinearLayout nL;
+    private LinearLayout nG;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_activity);
+
+        nN = (LinearLayout) findViewById(R.id.nag_notifcations);
+        nW = (LinearLayout) findViewById(R.id.nag_weather);
+        nL = (LinearLayout) findViewById(R.id.nag_lists);
+        nG = (LinearLayout) findViewById(R.id.nag_graphs);
+
+
+        nW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                weather(v);
+            }
+        });
+
+        nL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lists(v);
+            }
+        });
+
+        nG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                graphs(v);
+            }
+        });
+
+        nN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reminders(v);
+            }
+        });
+
+
         mDay = (Button) findViewById(R.id.day);
         mMonth = (Button) findViewById(R.id.month);
         mYear = (Button) findViewById(R.id.year);
@@ -145,5 +187,29 @@ public class GraphActivity extends Activity {
                 }
             }
         });
+    }
+
+    public void weather(View view ) {
+        Intent intent = new Intent(this, WeatherActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void lists(View view ) {
+        Intent intent = new Intent(this, ListsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void graphs(View view ) {
+        Intent intent = new Intent(this, GraphActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void reminders(View view ) {
+        Intent intent = new Intent(this, RemindersActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
