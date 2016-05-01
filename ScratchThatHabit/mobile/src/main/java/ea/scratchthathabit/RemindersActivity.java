@@ -241,5 +241,4 @@ public class RemindersActivity extends AppCompatActivity implements GestureDetec
         return false;
     }
 }
-//TestCommit2
 */
