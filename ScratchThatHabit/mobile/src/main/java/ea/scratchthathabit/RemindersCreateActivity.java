@@ -212,7 +212,6 @@ public class RemindersCreateActivity extends Activity {
 
         reminders.put(name, Reminder);
 
-
         Intent intent = new Intent();
 
         intent.putExtra("mode", mode);
@@ -220,7 +219,6 @@ public class RemindersCreateActivity extends Activity {
 
 
         setResult(RESULT_OK, intent);
-        Log.d(activity, "mode: " + intent.getStringExtra("mode") + "\nremindername: " + intent.getStringExtra("remindername"));
         finish();
     }
 

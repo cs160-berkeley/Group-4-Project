@@ -34,6 +34,8 @@ public class MainActivity extends Activity implements
     private LinearLayout graphsButton;
     private LinearLayout remindersButton;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
