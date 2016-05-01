@@ -8,8 +8,10 @@
     <string name="title_activity_reminder_context">Context Reminder</string>
     <string name="title_activity_graphs">Graphs</string>
 
+    <string name="weekly">Weekly</string>
     <string name="create_reminder">Create reminder</string>
     <string name="attach_list_text">Attach a list</string>
+    <string name="add_time">Add a time</string>
     <string name="attach_reminder_text">Attach a reminder</string>
     <string name="weather">weather</string>
     <string name="reminders">reminders</string>
