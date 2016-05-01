@@ -84,7 +84,7 @@ public class RemindersCreateActivity extends Activity {
         viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
         currentView = viewFlipper.findViewById(R.id.reminder_time);
 
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         mode = intent.getStringExtra("mode");
         if (mode != null && mode.equals("edit")) {
             String rName = intent.getStringExtra("remindername");
@@ -363,7 +363,7 @@ public class RemindersCreateActivity extends Activity {
     }
 
     public void populate() {
-
+        nameInput.setText(Reminder.getRName());
     }
 
 }

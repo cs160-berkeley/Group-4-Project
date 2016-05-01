@@ -61,8 +61,8 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/text"
                     android:layout_centerHorizontal="true"
-                    android:text="Friday"
                     android:textSize="24sp"
                     android:layout_marginTop="20dp"
                     android:id="@+id/today"
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content" />
 
                     <ImageView
-                        android:src="@drawable/temperature"
+                        android:src="@drawable/temperature_cut"
                         android:layout_toRightOf="@id/today_temp"
                         android:layout_centerVertical="true"
                         android:id="@+id/today_temp_img"
@@ -129,6 +129,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:textColor="@color/text"
                         android:id="@+id/humidity_label"
                         android:text="@string/humidity"
                         android:layout_width="wrap_content"
@@ -147,6 +148,7 @@
                             android:layout_height="25dp" />
 
                         <TextView
+                            android:textColor="@color/text"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="5dp"
                             android:layout_toRightOf="@+id/humidity_img"
@@ -167,6 +169,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:textColor="@color/text"
                         android:id="@+id/pollen_label"
                         android:text="Pollen"
                         android:layout_width="wrap_content"
@@ -186,6 +189,7 @@
                             android:layout_height="25dp" />
 
                         <TextView
+                            android:textColor="@color/text"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="5dp"
                             android:layout_toRightOf="@id/pollen_img"
@@ -224,35 +228,6 @@
 
 
         </LinearLayout>
-
-        <!--<LinearLayout-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:layout_below="@id/border"-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="wrap_content">-->
-
-
-            <!--<TextView-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="hello"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content" />-->
-
-            <!--<TextView-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="hello"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content" />-->
-
-            <!--<TextView-->
-                <!--android:text="hello"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content" />-->
-
-        <!--</LinearLayout>-->
-
 
 
     </RelativeLayout>

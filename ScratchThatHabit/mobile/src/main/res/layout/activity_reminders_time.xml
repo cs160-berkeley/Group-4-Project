@@ -39,12 +39,47 @@
             android:layout_toEndOf="@+id/MinutePicker" />
 
         <LinearLayout
+            android:clipToPadding="false"
             android:layout_below="@id/MinutePicker"
             android:id="@+id/days_panel"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
+            <!--<LinearLayout-->
+                <!--android:elevation="5dp"-->
+                <!--android:background="@color/white"-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="40dp">-->
+
+                <!--<TextView-->
+                    <!--android:textColor="@color/text"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textSize="28dp"-->
+                    <!--android:text="S"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:elevation="5dp"-->
+                <!--android:background="@color/colorPrimaryDark"-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="40dp">-->
+
+                <!--<TextView-->
+                    <!--android:textColor="@color/text"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textSize="28dp"-->
+                    <!--android:text="S"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+
+            <!--</LinearLayout>-->
 
             <ImageButton
                 android:layout_marginRight="-4dp"
