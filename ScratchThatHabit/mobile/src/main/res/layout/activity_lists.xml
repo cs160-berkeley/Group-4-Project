@@ -96,69 +96,68 @@
 
     </ScrollView>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/nav"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
         android:layout_alignParentBottom="true" >
 
         <LinearLayout
             android:id="@+id/nag_notifcations"
-            android:background="@color/backgroundGrey"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content">
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
             <ImageView
-                android:src="@drawable/alarm_white"
+                android:src="@drawable/alarm_black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nag_weather"
-            android:background="@color/backgroundGrey"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/nag_notifcations">
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:src="@drawable/weather_white"
+                android:src="@drawable/weather_black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nag_lists"
-            android:background="#1FDCE5"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/nag_weather">
+            android:background="@color/colorPrimary"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
             <ImageView
                 android:src="@drawable/list_white"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nag_graphs"
-            android:background="@color/backgroundGrey"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/nag_lists">
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:src="@drawable/graph_white"
+                android:src="@drawable/graph_black"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="50dp" />
 
         </LinearLayout>
 
 
-    </RelativeLayout>
-
-
-
+    </LinearLayout>
 
 </RelativeLayout>

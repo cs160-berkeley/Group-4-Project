@@ -1,13 +1,11 @@
 package ea.scratchthathabit;
 
 import android.app.Activity;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.GestureDetector;
@@ -42,17 +40,16 @@ public class RemindersActivity extends Activity {
     private boolean pushType;
     private Switch mType;
 
+    private LinearLayout nN;
+    private LinearLayout nW;
+    private LinearLayout nL;
+    private LinearLayout nG;
 
     LinkedHashMap<String, ReminderClass> reminders;
 
     private LinearLayout remindersLayout;
     ImageButton addBtn;
     private int requestCode = 1;
-
-    NotificationCompat.Builder mBuilder;
-    NotificationManager mNotificationManager;
-    int mId;
-
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -65,6 +62,33 @@ public class RemindersActivity extends Activity {
             reminders = new LinkedHashMap<>();
             myApp.setReminders(reminders);
         }
+
+        nN = (LinearLayout) findViewById(R.id.nag_notifcations);
+        nW = (LinearLayout) findViewById(R.id.nag_weather);
+        nL = (LinearLayout) findViewById(R.id.nag_lists);
+        nG = (LinearLayout) findViewById(R.id.nag_graphs);
+
+        nW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                weather(v);
+            }
+        });
+
+        nL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lists(v);
+            }
+        });
+
+
+        nG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                graphs(v);
+            }
+        });
 
         pushReminder = false;
         mPush = (Switch) findViewById(R.id.push);
@@ -168,6 +192,30 @@ public class RemindersActivity extends Activity {
             }
         });
         remindersLayout.addView(reminderNameView);
+    }
+
+    public void weather(View view ) {
+        Intent intent = new Intent(this, WeatherActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void lists(View view ) {
+        Intent intent = new Intent(this, ListsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void graphs(View view ) {
+        Intent intent = new Intent(this, GraphActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void reminders(View view ) {
+        Intent intent = new Intent(this, RemindersActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }

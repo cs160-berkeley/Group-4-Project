@@ -11,6 +11,10 @@ public class ItemList {
     private ArrayList<String> list;
     private ReminderClass reminder;
 
+    public ItemList() {
+
+    }
+
     public ItemList(String name, ArrayList<String> list) {
         this.name = name;
         this.list = list;

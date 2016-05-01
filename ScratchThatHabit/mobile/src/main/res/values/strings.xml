@@ -39,4 +39,13 @@
     <string name="tagThursday">whiteThursday</string>
     <string name="tagFriday">whiteFriday</string>
     <string name="tagSaturday">whiteSaturday</string>
+
+    <string name="day">day</string>
+    <string name="month">month</string>
+    <string name="year">year</string>
+
+    <string name="gScratching">Scratching</string>
+    <string name="gPollen">Pollen Level</string>
+    <string name="gReminders">Reminders</string>
+    <string name="gTemperature">Temperature</string>
 </resources>

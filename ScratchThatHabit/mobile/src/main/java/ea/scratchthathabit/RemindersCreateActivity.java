@@ -67,7 +67,10 @@ public class RemindersCreateActivity extends Activity {
 
     int requestCode = 1;
 
-
+    private LinearLayout nN;
+    private LinearLayout nW;
+    private LinearLayout nL;
+    private LinearLayout nG;
 
 
     @Override
@@ -75,6 +78,35 @@ public class RemindersCreateActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_reminders_create);
+
+        nN = (LinearLayout) findViewById(R.id.nag_notifcations);
+        nW = (LinearLayout) findViewById(R.id.nag_weather);
+        nL = (LinearLayout) findViewById(R.id.nag_lists);
+        nG = (LinearLayout) findViewById(R.id.nag_graphs);
+
+
+        nW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                weather(v);
+            }
+        });
+
+        nL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lists(v);
+            }
+        });
+
+
+        nG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                graphs(v);
+            }
+        });
+
 
         MyApp myApp = (MyApp) getApplicationContext();
         reminders = myApp.getReminders();
@@ -98,11 +130,11 @@ public class RemindersCreateActivity extends Activity {
             Reminder = reminders.get(rName);
             String rType = Reminder.getType();
             if (rType.equals("time")) {
-                setTimeLayout();
                 currentView = viewFlipper.findViewById(R.id.reminder_time);
+                setTimeLayout();
             } else {
-                setContextLayout();
                 currentView = viewFlipper.findViewById(R.id.reminder_context);
+                setContextLayout();
             }
             populate();
         } else {
@@ -300,6 +332,30 @@ public class RemindersCreateActivity extends Activity {
 
     public void populate() {
         nameInput.setText(Reminder.getRName());
+    }
+
+    public void weather(View view ) {
+        Intent intent = new Intent(this, WeatherActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void lists(View view ) {
+        Intent intent = new Intent(this, ListsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void graphs(View view ) {
+        Intent intent = new Intent(this, GraphActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void reminders(View view ) {
+        Intent intent = new Intent(this, RemindersActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }
