@@ -9,7 +9,7 @@
     <string name="title_activity_graphs">Graphs</string>
 
     <string name="weekly">Weekly</string>
-    <string name="create_reminder">Create reminder</string>
+    <string name="create_reminder">Edit reminder</string>
     <string name="attach_list_text">Attach a list</string>
     <string name="add_time">Add a time</string>
     <string name="attach_reminder_text">Attach a reminder</string>
@@ -25,4 +25,18 @@
     <string name="vibration">Vibration</string>
     <string name="time">Time</string>
     <string name="context">Context</string>
+
+    <string name="s">S</string>
+    <string name="m">M</string>
+    <string name="t">T</string>
+    <string name="w">W</string>
+    <string name="f">F</string>
+
+    <string name="tagSunday">whiteSunday</string>
+    <string name="tagMonday">whiteMonday</string>
+    <string name="tagTuesday">whiteTuesday</string>
+    <string name="tagWednesday">whiteWednesday</string>
+    <string name="tagThursday">whiteThursday</string>
+    <string name="tagFriday">whiteFriday</string>
+    <string name="tagSaturday">whiteSaturday</string>
 </resources>

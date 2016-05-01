@@ -51,20 +51,20 @@ public class RemindersContextActivity extends Activity {
 
 
         //GETDAYS:
-        Sunday = (ImageButton) findViewById(R.id.Sunday);
-        Sunday.setTag(R.drawable.swhite);
-        Monday = (ImageButton) findViewById(R.id.Monday);
-        Monday.setTag(R.drawable.mwhite);
-        Tuesday = (ImageButton) findViewById(R.id.Tuesday);
-        Tuesday.setTag(R.drawable.twhite);
-        Wednesday = (ImageButton) findViewById(R.id.Wednesday);
-        Wednesday.setTag(R.drawable.wwhite);
-        Thursday = (ImageButton) findViewById(R.id.Thursday);
-        Thursday.setTag(R.drawable.twhite);
-        Friday = (ImageButton) findViewById(R.id.Friday);
-        Friday.setTag(R.drawable.fwhite);
-        Saturday = (ImageButton) findViewById(R.id.Saturday);
-        Saturday.setTag(R.drawable.swhite);
+//        Sunday = (ImageButton) findViewById(R.id.Sunday);
+//        Sunday.setTag(R.drawable.swhite);
+//        Monday = (ImageButton) findViewById(R.id.Monday);
+//        Monday.setTag(R.drawable.mwhite);
+//        Tuesday = (ImageButton) findViewById(R.id.Tuesday);
+//        Tuesday.setTag(R.drawable.twhite);
+//        Wednesday = (ImageButton) findViewById(R.id.Wednesday);
+//        Wednesday.setTag(R.drawable.wwhite);
+//        Thursday = (ImageButton) findViewById(R.id.Thursday);
+//        Thursday.setTag(R.drawable.twhite);
+//        Friday = (ImageButton) findViewById(R.id.Friday);
+//        Friday.setTag(R.drawable.fwhite);
+//        Saturday = (ImageButton) findViewById(R.id.Saturday);
+//        Saturday.setTag(R.drawable.swhite);
 
         View.OnClickListener SunbuttonListener = new View.OnClickListener() {
             @Override

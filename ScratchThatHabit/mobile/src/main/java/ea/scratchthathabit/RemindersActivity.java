@@ -32,7 +32,6 @@ import java.util.LinkedHashMap;
 
 public class RemindersActivity extends Activity {
 
-    private GestureDetectorCompat mDetector;
     // following button and switches are for use during demo
     // mReminder will be replaced once ReminderActivity is implemented
     private Button mReminder;

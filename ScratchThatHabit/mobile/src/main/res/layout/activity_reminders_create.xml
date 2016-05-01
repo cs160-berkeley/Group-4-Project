@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
+    android:clipToPadding="false"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroundGrey"
     android:layout_height="match_parent">
@@ -109,6 +110,7 @@
     </RelativeLayout>
 
     <ViewFlipper
+        android:clipToPadding="false"
         android:layout_marginTop="10dp"
         android:id="@+id/view_flipper"
         android:layout_width="match_parent"

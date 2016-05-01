@@ -29,7 +29,8 @@
             android:name=".ListsActivity"
             />
         <activity
-            android:name=".EditListsActivity">
+            android:name=".EditListsActivity"
+            android:windowSoftInputMode="adjustPan">
 
         </activity>
         <activity android:name=".GraphActivity" />
