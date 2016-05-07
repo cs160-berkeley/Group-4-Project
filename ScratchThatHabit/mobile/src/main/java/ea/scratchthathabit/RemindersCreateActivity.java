@@ -215,8 +215,7 @@ public class RemindersCreateActivity extends Activity {
 
                 //change attachment text/icon here
                 final TextView attachListText = (TextView) currentView.findViewById(R.id.attach_list_text);
-                attachListText.setText("List " + listname + "attached");
-
+                attachListText.setText("List " + listname + " attached");
                 attachList.setBackground(getDrawable(R.drawable.close_button));
             }
         }

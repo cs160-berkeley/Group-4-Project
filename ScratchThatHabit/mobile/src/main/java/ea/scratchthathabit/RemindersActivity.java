@@ -51,10 +51,15 @@ public class RemindersActivity extends Activity {
     ImageButton addBtn;
     private int requestCode = 1;
 
+    private String mode;
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminders);
+
+        Intent intent = getIntent();
+        mode = intent.getStringExtra("mode");
 
         MyApp myApp = (MyApp) getApplicationContext();
         reminders = myApp.getReminders();
@@ -185,10 +190,17 @@ public class RemindersActivity extends Activity {
         reminderNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), RemindersCreateActivity.class);
-                intent.putExtra("mode", "edit");
-                intent.putExtra("remindername", name);
-                startActivityForResult(intent, requestCode);
+                if (mode != null && mode.equals("attach")) {
+                    Intent intent = new Intent();
+                    intent.putExtra("remindername", name);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(getBaseContext(), RemindersCreateActivity.class);
+                    intent.putExtra("mode", "edit");
+                    intent.putExtra("remindername", name);
+                    startActivityForResult(intent, requestCode);
+                }
             }
         });
         remindersLayout.addView(reminderNameView);

@@ -122,7 +122,6 @@ public class ListsActivity extends Activity {
         } else {
             nameView.setImg(R.drawable.alarm_grey);
         }
-
         nameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

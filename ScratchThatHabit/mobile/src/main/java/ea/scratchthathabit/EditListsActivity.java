@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ public class EditListsActivity extends Activity {
     private ImageButton attachListBtn;
     private ImageButton saveBtn;
     private ImageButton closeBtn;
+    private TextView attachText;
     private String mode;
     private int requestCode = 1;
 
@@ -105,6 +107,7 @@ public class EditListsActivity extends Activity {
         });
 
         itemList = new ItemList();
+        attachText = (TextView) findViewById(R.id.attach_text);
     }
 
     @Override
@@ -117,6 +120,7 @@ public class EditListsActivity extends Activity {
                 itemList.setReminder(reminderClass);
 
 //                change ui to indicate attached reminder
+                attachText.setText("Reminder " + reminderName + " attached");
 
             }
         }
