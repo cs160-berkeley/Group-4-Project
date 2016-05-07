@@ -136,7 +136,7 @@ public class RemindersActivity extends Activity {
                         startService(sendWearIntent);
                     }
                 } else {
-                    Intent sendIntent = new Intent(getBaseContext(), RemindersTimeActivity.class);
+                    Intent sendIntent = new Intent(getBaseContext(), RemindersCreateActivity.class);
                     startActivity(sendIntent);
                 }
             }

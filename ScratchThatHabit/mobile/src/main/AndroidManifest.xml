@@ -22,9 +22,6 @@
         <activity
             android:name=".RemindersCreateActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".RemindersContextActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".RemindersTimeActivity" />
         <activity
             android:name=".ListsActivity"
             />

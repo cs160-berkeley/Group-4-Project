@@ -50,31 +50,35 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:layout_width="90dp"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:text="@string/day"
             android:id="@+id/day"
             android:textColor="@color/white"
-            android:background="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:layout_alignTop="@+id/month"
             android:layout_toStartOf="@+id/month" />
 
         <Button
-            android:layout_width="90dp"
+            android:layout_marginLeft="-8dp"
+            android:layout_marginRight="-8dp"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:text="@string/month"
             android:id="@+id/month"
-            android:background="@color/white"
+            android:textColor="@color/text"
+            android:backgroundTint="@color/white"
             android:layout_marginTop="25dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
         <Button
-            android:layout_width="90dp"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
+            android:textColor="@color/text"
             android:text="@string/year"
             android:id="@+id/year"
-            android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:layout_alignTop="@+id/month"
             android:layout_toEndOf="@+id/month" />
 
@@ -128,7 +132,7 @@
         android:id="@+id/graph"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:src="@drawable/graph" />
 
     <ImageView
@@ -137,7 +141,7 @@
         android:id="@+id/temperatureLine"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:src="@drawable/temperature_day" />
 
     <ImageView
@@ -146,7 +150,7 @@
         android:id="@+id/scratchingLine"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:src="@drawable/scratching_day" />
 
     <ImageView
@@ -155,7 +159,7 @@
         android:id="@+id/pollenLine"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:src="@drawable/pollen_day" />
 
     <ImageView

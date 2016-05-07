@@ -36,7 +36,7 @@ public class EditListsActivity extends Activity {
     private ImageButton saveBtn;
     private ImageButton closeBtn;
     private String mode;
-    private int requestCode;
+    private int requestCode = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -151,12 +151,6 @@ public class EditListsActivity extends Activity {
         Intent intent = new Intent();
         if (name.equals("")) {
             return;
-        }
-        if (mode.equals("edit")) {
-            String oldName = itemList.getName();
-            if (!oldName.equals(name)) {
-                lists.remove(oldName);
-            }
         }
         itemList.setName(name);
         itemList.setList(items);

@@ -3,8 +3,10 @@ package ea.scratchthathabit;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -48,10 +50,19 @@ public class GraphActivity extends Activity {
     private LinearLayout nL;
     private LinearLayout nG;
 
+
+    int colorPrimaryDark;
+    int colorWhite;
+    int colorText;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_activity);
+
+        colorPrimaryDark = ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark);
+        colorWhite = ContextCompat.getColor(getBaseContext(), R.color.white);
+        colorText = ContextCompat.getColor(getBaseContext(), R.color.text);
 
         nN = (LinearLayout) findViewById(R.id.nag_notifcations);
         nW = (LinearLayout) findViewById(R.id.nag_weather);
@@ -94,9 +105,6 @@ public class GraphActivity extends Activity {
         mRemindersLine = (ImageView) findViewById(R.id.remindersLine);
         mPollenLine = (ImageView) findViewById(R.id.pollenLine);
         interval = DAY;
-        mDay.setBackgroundColor(Color.parseColor(SELECTED));
-        mMonth.setBackgroundColor(Color.parseColor(UNSELECTED));
-        mYear.setBackgroundColor(Color.parseColor(UNSELECTED));
         mTemperatureBox.setChecked(true);
         mScratchingBox.setChecked(true);
         mRemindersBox.setChecked(true);
@@ -112,9 +120,12 @@ public class GraphActivity extends Activity {
         mDay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 interval = DAY;
-                mDay.setBackgroundColor(Color.parseColor(SELECTED));
-                mMonth.setBackgroundColor(Color.parseColor(UNSELECTED));
-                mYear.setBackgroundColor(Color.parseColor(UNSELECTED));
+                mDay.getBackground().setColorFilter(colorPrimaryDark, PorterDuff.Mode.MULTIPLY);
+                mDay.setTextColor(colorWhite);
+                mMonth.getBackground().setColorFilter(colorWhite, PorterDuff.Mode.MULTIPLY);
+                mMonth.setTextColor(colorText);
+                mYear.getBackground().setColorFilter(colorWhite, PorterDuff.Mode.MULTIPLY);
+                mYear.setTextColor(colorText);
                 mTemperatureLine.setImageResource(R.drawable.temperature_day);
                 mPollenLine.setImageResource(R.drawable.pollen_day);
                 mScratchingLine.setImageResource(R.drawable.scratching_day);
@@ -124,9 +135,12 @@ public class GraphActivity extends Activity {
         mMonth.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 interval = MONTH;
-                mDay.setBackgroundColor(Color.parseColor(UNSELECTED));
-                mMonth.setBackgroundColor(Color.parseColor(SELECTED));
-                mYear.setBackgroundColor(Color.parseColor(UNSELECTED));
+                mDay.getBackground().setColorFilter(colorWhite, PorterDuff.Mode.MULTIPLY);
+                mDay.setTextColor(colorText);
+                mMonth.getBackground().setColorFilter(colorPrimaryDark, PorterDuff.Mode.MULTIPLY);
+                mMonth.setTextColor(colorWhite);
+                mYear.getBackground().setColorFilter(colorWhite, PorterDuff.Mode.MULTIPLY);
+                mYear.setTextColor(colorText);
                 mTemperatureLine.setImageResource(R.drawable.temperature_month);
                 mPollenLine.setImageResource(R.drawable.pollen_month);
                 mScratchingLine.setImageResource(R.drawable.scratching_month);
@@ -136,9 +150,12 @@ public class GraphActivity extends Activity {
         mYear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 interval = YEAR;
-                mDay.setBackgroundColor(Color.parseColor(UNSELECTED));
-                mMonth.setBackgroundColor(Color.parseColor(UNSELECTED));
-                mYear.setBackgroundColor(Color.parseColor(SELECTED));
+                mDay.getBackground().setColorFilter(colorWhite, PorterDuff.Mode.MULTIPLY);
+                mDay.setTextColor(colorText);
+                mMonth.getBackground().setColorFilter(colorWhite, PorterDuff.Mode.MULTIPLY);
+                mMonth.setTextColor(colorText);
+                mYear.getBackground().setColorFilter(colorPrimaryDark, PorterDuff.Mode.MULTIPLY);
+                mYear.setTextColor(colorWhite);
                 mTemperatureLine.setImageResource(R.drawable.temperature_year);
                 mPollenLine.setImageResource(R.drawable.pollen_year);
                 mScratchingLine.setImageResource(R.drawable.scratching_year);
