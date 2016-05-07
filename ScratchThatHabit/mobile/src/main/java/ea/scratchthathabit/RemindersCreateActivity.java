@@ -57,6 +57,8 @@ public class RemindersCreateActivity extends Activity {
     NumberPicker HourPicker;
     NumberPicker MinutePicker;
     NumberPicker AMPMPicker;
+    ImageButton addTimeButton;
+    LinearLayout timesLayout;
 
     //    context specific
     CheckBox arriving;
@@ -256,6 +258,14 @@ public class RemindersCreateActivity extends Activity {
 
             }
         });
+        timesLayout = (LinearLayout) currentView.findViewById(R.id.times_layout);
+        addTimeButton = (ImageButton) currentView.findViewById(R.id.add_time_button);
+        addTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTime();
+            }
+        });
     }
 
     public void findAlarmType() {
@@ -298,6 +308,26 @@ public class RemindersCreateActivity extends Activity {
 
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private void addTime() {
+        int hour = HourPicker.getValue();
+        int minutes = MinutePicker.getValue();
+        String minuteString;
+        if (minutes < 10) {
+            minuteString = "0" + minutes;
+        } else {
+            minuteString = String.valueOf(minutes);
+        }
+        arrayString = new String[]{"AM", "PM"};
+        int ampm = AMPMPicker.getValue();
+        String timeString = String.format("%d:%s %s", hour, minuteString, arrayString[ampm]);
+        TextView textView = new TextView(getBaseContext());
+        textView.setText(timeString);
+        textView.setTextColor(colorText);
+        textView.setTextSize(14);
+        timesLayout.addView(textView);
+        Log.d(activity, timeString + " added");
     }
 
     public void setDays() {
